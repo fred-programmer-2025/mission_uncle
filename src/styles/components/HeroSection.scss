@@ -1,0 +1,87 @@
+@use "sass:color";
+
+.hero-section {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgba(224, 224, 224, 1);
+
+
+  .carousel {
+    height: 100%;
+  }
+
+  .carousel-inner {
+    height: 100%;
+  }
+
+  .carousel-item {
+    height: 100%;
+  }
+
+  .carousel-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+  }
+
+  .uncle-cutout {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    z-index: 2;
+    
+    img {
+      max-width: 300px;
+      height: auto;
+    }
+  }
+
+  .carousel-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+    max-width: 600px;
+    
+    h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    
+    button {
+      background-color: #64A70B;
+      border: none;
+      padding: 0.5rem 2rem;
+      font-size: 1.2rem;
+      
+      &:hover {
+        background-color: color.adjust(#64A70B, $lightness: -10%);
+      }
+    }
+  }
+
+  // 客製化輪播按鈕
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 5%;
+    opacity: 0.8;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

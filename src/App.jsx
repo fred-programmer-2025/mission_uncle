@@ -1,32 +1,17 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import { Routes, Route, Link } from 'react-router-dom'
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AppRoutes from "./routes/AppRoutes";
 
-function Home() {
-  return <h1>Home Page</h1>
-}
-
-function About() {
-  return <h1>About Page</h1>
-}
-
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
     <>
-      <nav>
-        <Link className="btn btn-primary me-2" to="/">Home</Link>
-        <Link className="btn btn-secondary" to="/about">About</Link>
-      </nav>
-      <hr />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+      <Navbar />
+      <AppRoutes />
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
