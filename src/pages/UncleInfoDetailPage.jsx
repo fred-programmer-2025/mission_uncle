@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import '../style.css';
+import '../uncleinfo.css';
 
 const photoAddressData = 
   [
