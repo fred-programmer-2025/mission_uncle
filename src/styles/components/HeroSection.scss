@@ -5,7 +5,7 @@
     position:relative;
     width:70%;
     left:16.8%;
-    top: -70px;
+    top: -90px;
     .custom-control {
       position: absolute; // 絕對定位
       border: rgba(115, 219, 106, 1) 2px solid;
@@ -80,7 +80,7 @@
 
 @media (max-width: 1800px){
   .carousel-controls-wrapper{
-    top:-120px !important;
+    top:-130px !important;
   }
   .carousel-indicators{
     bottom: 5% !important;
