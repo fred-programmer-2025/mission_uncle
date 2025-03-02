@@ -47,8 +47,8 @@ const HeroSection = () => {
 
 
   return (
-    <div className="hero-section position-relative custom-hero pb-md-5">
-      <div className="row">
+    <div className="hero-section position-relative custom-hero pb-md-5 pt-md-5">
+      <div className="row pt-md-5">
           {/* 左側背景 - 高度與整體區域相同 */}
           <div className="col-md-4 position-absolute h-100 d-md-block d-none" style={{ 
             left: 0,

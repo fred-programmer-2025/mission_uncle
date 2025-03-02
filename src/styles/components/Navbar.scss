@@ -1,0 +1,42 @@
+.navbar-transparent {
+  background-color: transparent;
+  position:relative;
+  z-index: 3;
+  top: 120px; 
+  margin-top: -110px; 
+}
+
+.navbar-gray {
+  background-color: #f5f5f5;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); // 增加陰影，區隔內容
+}
+
+.navbar-link,
+.cart-icon-link {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding-bottom: 5px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* 與文字/圖片之間留一些空間 */
+    width: 0%;
+    height: 3px;
+    background-color: rgba(115, 219, 106, 1);
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+/* 確保 cartIcon 也適用相同效果 */
+.cart-icon-link {
+  display: inline-block;
+  padding-bottom: 5px; /* 為了讓 hover 底線有空間 */
+}
