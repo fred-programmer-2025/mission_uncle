@@ -34,7 +34,7 @@ const Navbar = () => {
 
           {/* 選單按鈕 */}
           <div>
-            <Link className="me-4 fw-bold text-dark text-decoration-none navbar-link" to="/challenge">大叔接招</Link>
+            <Link className="me-4 fw-bold text-dark text-decoration-none navbar-link" to="/mission">大叔接招</Link>
             <Link className="me-4 fw-bold text-dark text-decoration-none navbar-link" to="/articles">精選文章</Link>
             <Link className="cart-icon-link" to="/cart">
               <img src={ cartIcon } alt="" />
@@ -64,7 +64,7 @@ const Navbar = () => {
         <div className={`mobile-menu ${menuOpen ? "show" : ""}`}>
           <ul className="nav flex-column">
             <li className="nav-item">
-              <Link className="menu-item" to="/challenge" onClick={toggleMenu}>
+              <Link className="menu-item" to="/mission" onClick={toggleMenu}>
                 大叔接招
               </Link>
             </li>

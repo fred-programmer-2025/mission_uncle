@@ -2,8 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import UncleInfoPage from "../pages/UncleInfoPage";
+import UncleInfoDetailPage from "../pages/UncleInfoDetailPage";
 import Articles from "../pages/Articles";
-import Cart from "../pages/Cart";
 import Admin from "../pages/Admin";
 import CartPage from "../pages/CartPage";
 import CartFormPage from "../pages/CartFormPage";
@@ -13,8 +13,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/mission" element={<UncleInfoPage />} />
+      <Route path="/mission/:id" element={<UncleInfoDetailPage />} />
       <Route path="/articles" element={<Articles />} />
-      <Route path="/cart" element={<Cart />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/cartForm" element={<CartFormPage />} />
