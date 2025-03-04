@@ -1,3 +1,4 @@
+
 import PaginationStyle from "../styles/PaginationStyle";
 function Pagination({ pageInfo, handlePageChange }) {
   return (
@@ -43,6 +44,7 @@ function Pagination({ pageInfo, handlePageChange }) {
             </li>
           </ul>
         </PaginationStyle>
+
       </nav>
     </>
   );
