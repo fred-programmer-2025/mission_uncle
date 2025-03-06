@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import UncleInfoPage from "../pages/UncleInfoPage";
 import UncleInfoDetailPage from "../pages/UncleInfoDetailPage";
-import Articles from "../pages/Articles";
+import Articles from "../pages/ArticlePage";
 import Admin from "../pages/Admin";
 import CartPage from "../pages/CartPage";
 import CartFormPage from "../pages/CartFormPage";
