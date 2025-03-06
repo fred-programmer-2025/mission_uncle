@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 // import ArticlePageStyle from "../styles/ArticlePageStyle";
 // import ArticleBannerStyle from "../styles/ArticleBannerStyle";
+import { ClipLoader } from "react-spinners";
 import "../styles/ArticlePageStyle.scss";
 import "../styles/ArticleBannerStyle.scss";
 import Pagination from "../components/Pagination";
@@ -133,8 +134,24 @@ function ArticlePage() {
               ></Card>
             ))
           ) : (
-            <div>
-              <p>⏳ 載入中</p>
+            <div
+              className="d-flex justify-content-center align-items-center"
+              style={{
+                position: "fixed",
+                inset: 0,
+                backgroundColor: "rgba(255,255,255,0.3)",
+                zIndex: 999,
+                fontSize: 20,
+                top: 85,
+              }}
+            >
+              <ClipLoader
+                color={"#000000"}
+                size={30}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+              &nbsp; 讀取中...
             </div>
           )}
         </div>
