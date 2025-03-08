@@ -1,42 +1,114 @@
 import React from "react";
+import "../styles/components/ContactUs.scss";
+import titleBg from "../assets/title_bg.jpg";
+import customerServiceImgLarge from '../assets/customer_service_large.jpg';
+import stickerImg from '../assets/sticker_green.png';
+import coWorkingBg from '../assets/coworking_bg.png';
 
 const ContactUs = () => {
   return (
-    <section className="contact-us container my-5">
-      {/* 標題 */}
-      <div className="text-center mb-4">
-        <h2 className="fw-bold">聯絡我們</h2>
-        <p className="text-muted">如果有任何問題或需要協助，歡迎透過表單聯絡我們，或直接來訪我們的客服中心！</p>
-      </div>
+    <section className="contact-us position-relative overflow-hidden">
+      {/* 1. 背景圖 - 在 md 以上寬度佔 col-8，md 以下佔 col-12 */}
+      <div className="container-fluid p-0">
+        <div className="row pt-5 pt-md-0 g-0">
+          <div className="col-12 col-md-4 position-relative">
+            {/* 黃色卡片定位容器 */}
+            <div className="position-relative translate-middle top-50 yellow-card-position" style={{ 
+                right: '0',
+                left: '100%',
+                zIndex: 3
+              }}>
+              {/* 3. 聯絡我們絕對定位在黃色卡片上 */}
+              <div className="position-absolute" style={{ 
+                top: '0', 
+                left: '0',
+                transform: 'translateY(-50%)',
+                zIndex: 3
+              }}>
+                <div className="px-1 py-2 border border-dark" style={{ 
+                  backgroundColor: 'rgba(165, 238, 157, 1)', 
+                  boxShadow: '2px 3px 4px rgba(0, 0, 0, 0.25)' 
+                }}>
+                  <div className="fw-bold text-center" style={{ 
+                    fontSize: 'clamp(12px, 1.2vw , 28px)', 
+                    writingMode: 'vertical-Lr' 
+                  }}>
+                    聯絡我們
+                  </div>
+                </div>
+              </div>
 
-      <div className="row">
-        {/* 聯絡表單 */}
-        <div className="col-md-6">
-          <div className="bg-light p-4 rounded shadow-sm">
-            <form>
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">姓名</label>
-                <input type="text" className="form-control" id="name" placeholder="請輸入您的姓名" />
+              {/* 4. 黃色卡片在 md 以上最大寬度為 418px */}
+              <div className="position-relative" style={{
+                maxWidth: '418px',
+                width: '100%'
+              }}>
+                <img 
+                  src={ titleBg}
+                  alt="背景" 
+                  className="img-fluid w-100"
+                />
+                <div className="position-absolute top-0 left-0 w-100 h-100 p-3 d-flex flex-column justify-content-center">
+                  <p className="mb-md-4 fw-bold" style={{ 
+                    fontSize: 'clamp(10px, 1.5vw, 16px)',
+                    lineHeight: '1.4'
+                  }}>
+                    如有任何問題或需要協助,歡迎透過客服信箱、電話或線上表單與我們聯繫。我們的客服團隊將提供為您服務,提供專業與貼心的解答,讓您的體驗更順暢。
+                  </p>
+                  <button className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2" 
+                    style={{ 
+                      backgroundColor: 'rgba(115, 219, 106, 1)',
+                      fontSize: 'clamp(10px, 1.5vw, 16px)'
+                    }}>
+                    立即聯絡 &gt;
+                  </button>
+                </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">電子郵件</label>
-                <input type="email" className="form-control" id="email" placeholder="請輸入您的電子郵件" />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="message" className="form-label">訊息</label>
-                <textarea className="form-control" id="message" rows="4" placeholder="請輸入您的訊息"></textarea>
-              </div>
-              <button type="submit" className="btn btn-success w-100">送出訊息</button>
-            </form>
+            </div>
           </div>
-        </div>
+          <div className="col-12 col-md-8 position-relative">
+            <img 
+              src={ coWorkingBg }
+              alt="背景圖片" 
+              className="img-fluid w-100 h-100 object-fit-cover"
+              style={{ minHeight: '610px' }}
+            />
+            
+            {/* 客服資訊 - 照片和文字區塊 */}
+            <div className="position-absolute photo-card-position" style={{
+              top: '35%',
+              right: '33%',
+              transform: 'translateY(-30%)',
+              zIndex: 4,
+              maxWidth: '396px'
+            }}>
+              <div className="bg-white p-2 shadow position-relative">
+                {/* 2. 膠帶絕對定位在照片上 */}
+                <div className="position-absolute" style={{
+                  top: '-22px',
+                  right: '38%',
+                  zIndex: 5,
+                  transform: 'rotate(-9deg)',
+                  width: '84px'
+                }}>
+                  <img 
+                    src={ stickerImg } 
+                    alt="膠帶" 
+                    className="img-fluid"
+                  />
+                </div>
 
-        {/* 客服資訊 */}
-        <div className="col-md-6 d-flex flex-column align-items-center justify-content-center text-center">
-          <img src="https://source.unsplash.com/200x200/?customer,service" alt="客服人員" className="rounded-circle mb-3 shadow-sm" />
-          <h5 className="fw-bold">客服中心</h5>
-          <p className="text-muted">Call us, we are glad to help!</p>
-          <button className="btn btn-outline-success">立即聯絡</button>
+                <img 
+                  src={ customerServiceImgLarge }
+                  alt="客服人員工作中" 
+                  className="img-fluid w-100 mb-2"
+                />
+                <div className="text-center py-2">
+                  <p className="small mb-0 fst-italic">Call us, we are glad to help!</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
