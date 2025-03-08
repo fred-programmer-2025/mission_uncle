@@ -1,9 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { ClipLoader } from "react-spinners";
 import Cookies from 'js-cookie';
 import axios from "axios";
-import '../cartform.css';
+import "../styles/components/Cart.scss";
+import { useCart } from "../context/CartContext";
+import BackgroundTree from "../components/BackgroundTree";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -11,15 +14,17 @@ const API_PATH = import.meta.env.VITE_API_PATH;
 export default function CartFormPage() {
   const [cart, setCart] = useState({});
   const [cookieData, setCookieData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isScreenLoading, setIsScreenLoading] = useState(false);
   const navigate = useNavigate();
+  const { setCartCount } = useCart();
   
   // 正確設置useForm，確保引入handleSubmit
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   // 取得購物車資料
   const getCart = async () => {
-    // setIsScreenLoading(true);
+    setIsScreenLoading(true);
     try {
       const tickList = Cookies.get("tickList");
       if (tickList) {
@@ -27,15 +32,12 @@ export default function CartFormPage() {
         setCookieData(tickListAry);
       }
       const res = await axios.get(`${BASE_URL}/api/${API_PATH}/cart`);
-      if (res.data.data.carts.length === 0) {
-        // setHasNoCart(true);
-      }
       setCart(res.data.data);
     // eslint-disable-next-line no-unused-vars
     } catch (error) {
       alert('取得購物車列表失敗');
     } finally {
-      // setIsScreenLoading(false);
+      setIsScreenLoading(false);
     }
   }
 
@@ -51,35 +53,8 @@ export default function CartFormPage() {
     });
   }, []);
 
-  const removeCartItem = async (cartItem_id) => {
-    try {
-      setIsScreenLoading(true);
-      await axios.delete(`${BASE_URL}/v2/api/${API_PATH}/cart/${cartItem_id}`);
-      getCart();
-    } catch (error) {
-      alert("刪除購物車品項失敗");
-    } finally {
-      setIsScreenLoading(false);
-    }
-  };
-
-  const updateCartItem = async (cartItem_id, product_id, qty) => {
-    try {
-      setIsScreenLoading(true);
-      await axios.put(`${BASE_URL}/v2/api/${API_PATH}/cart/${cartItem_id}`, {
-        data: { product_id, qty: Number(qty) },
-      });
-      getCart();
-    } catch (error) {
-      alert("更新購物車品項失敗");
-    } finally {
-      setIsScreenLoading(false);
-    }
-  };
-
   // 定義onSubmit函數，由handleSubmit包裝
   const onSubmit = (data) => {
-    console.log("表單資料:", data);
     const { message, ...user } = data;
     user.address = user.address || "預設地址";
     const userInfo = { data: { user, message } };
@@ -87,34 +62,24 @@ export default function CartFormPage() {
   };
 
   const checkout = async (data) => {
+    setIsLoading(true);
     try {
-      console.log("準備結帳，資料:", data);
-      const response = await axios.post(`${BASE_URL}/v2/api/${API_PATH}/order`, data);
-      console.log("結帳成功:", response.data);
+      const res = await axios.post(`${BASE_URL}/api/${API_PATH}/order`, data);
+      Cookies.remove("tickList");
+      setCartCount(0);
       reset(); // 清空表單
-      navigate("/order", {
-        state: {
-          cartItems: cart.carts, // 購物車商品
-          formData: { ...data.data.user, paymentStatus: "已付款" }, // 添加付款狀態
-        },
-      });
+      navigate("/order");
     } catch (error) {
-      console.error("結帳失敗:", error);
       alert("結帳失敗: " + (error.response?.data?.message || error.message));
-    }
-  };
-
-  const handleContinueShopping = async () => {
-    try {
-      await axios.get(`${BASE_URL}/v2/api/${API_PATH}/products`);
-      window.location.href = "/uncleinfo";
-    } catch (error) {
-      alert("取得產品列表失敗");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="container mt-3 mb-5">
+    <>
+    <BackgroundTree title={'訂購人資訊'}/>
+    <div className="container cartForm-container mt-3 mb-5">
       {/* 訂購人資訊 */}
       <div className="order-info">
         <div className="order-content">
@@ -128,8 +93,7 @@ export default function CartFormPage() {
                 {...register("email", {
                   required: "Email 欄位必填",
                   pattern: {
-                    value:
-                      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     message: "Email 格式錯誤",
                   },
                 })}
@@ -185,18 +149,18 @@ export default function CartFormPage() {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="paymentMethod">
+              <label htmlFor="payment">
                   請選擇付款方式<span className="text-danger">*</span>
               </label>
               
               <select
                 {...register("payment", { required: "請選擇付款方式" })}
                 id="payment"
-                className={`form-control form-custom ${errors.payment && "is-invalid"}`}
+                className={`form-select form-custom ${errors.payment && "is-invalid"}`}
+                name="payment"
+                defaultValue="" // 確保初始值是空的
               >
-                <option value="" >
-                  請選擇付款方式
-                </option>
+                <option value="" disabled>請選擇付款方式</option>
                 <option value="WebATM">WebATM</option>
                 <option value="ATM">ATM</option>
                 <option value="CVS">CVS</option>
@@ -221,9 +185,17 @@ export default function CartFormPage() {
             </div>
 
             {/* 按鈕 */}
-            <div className="d-flex justify-content-between">
-              <button className="shipping-button" onClick={() => navigate(-1)}>上一步</button>
-              <button className="order-button" onClick={() => navigate('/order')}>確認結帳</button>
+            <div className="final-button">
+              <button className="shipping-button cartForm-shipping-button" onClick={() => navigate(-1)}>上一步</button>
+              <button type="submit" className="order-button cartForm-order-button">
+                確認結帳                
+                {isLoading && <ClipLoader 
+                  color={'#000000'}
+                  size={15}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                  />
+                }</button>
             </div>
           </form>
         </div>
@@ -232,12 +204,12 @@ export default function CartFormPage() {
       {/* 訂單明細 */}
       <div className="cart-info">
         <div className="cart-content">
-          <div style={{fontSize: '20px'}}>訂單明細</div>
+          <div><label style={{fontSize: '20px'}}>訂單明細</label></div>
           {cart.carts?.length &&
             (cart.carts.map((cartItem, index) => {
               return (
                 <div key={cartItem.id} className="cart-list mt-2">
-                  <div style={{width: '120px', height: '120px'}}><img style={{width: '100%', height: '100%', objectFit: 'cover'}} src={cartItem.product.imageUrl} alt={cartItem.product.title} /></div>
+                  <div className="cart-image"><img style={{width: '100%', height: '100%', objectFit: 'cover'}} src={cartItem.product.imageUrl} alt={cartItem.product.title} /></div>
                   <div className="cart-text-all">
                     <div className="cart-text">
                       <div className="cart-text-sub">
@@ -272,5 +244,22 @@ export default function CartFormPage() {
         </div>
       </div>
     </div>
+    {isScreenLoading && (<div
+      className="d-flex justify-content-center align-items-center"
+      style={{
+        position: "fixed",
+        inset: 0,
+        backgroundColor: "rgba(255,255,255,0.3)",
+        zIndex: 999
+      }}
+    >
+    <ClipLoader 
+      color={'#000000'}
+      size={30}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
+    </div>)}
+  </>
   );
 }
