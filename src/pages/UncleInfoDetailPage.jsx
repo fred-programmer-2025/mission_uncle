@@ -8,7 +8,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import '../uncleinfo.css';
+import "../styles/components/UncleInfo.scss";
+import { useCart } from "../context/CartContext";
+import BackgroundTree from '../components/BackgroundTree';
 
 const photoAddressData = 
   [
@@ -29,6 +31,7 @@ export default function UncleInfoDetailPage() {
   const { id: product_id } = useParams(); //重新命名為product_id
   const [qty, setQty] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const { addToCart } = useCart(); // 取得加入購物車的方法
   
   const handlePhotoAddress = (el) => {
     setSubPhotoAddress(el.target.currentSrc);
@@ -88,6 +91,7 @@ export default function UncleInfoDetailPage() {
         }
       });
       alert('加入購物車成功');
+      addToCart();
       let cookieData = null;
       if (Cookies.get("tickList")) {
         cookieData = JSON.parse(Cookies.get("tickList"));
@@ -106,6 +110,7 @@ export default function UncleInfoDetailPage() {
 
   return (
     <>
+      <BackgroundTree title={'大叔接招'}/>
       <div className="container">
         <div className="uncle-photo">
             <div className='section-1'>
