@@ -3,6 +3,9 @@ import { useNavigate } from "react-router";
 import { ClipLoader } from "react-spinners";
 import Cookies from 'js-cookie';
 import axios from "axios";
+import { useCart } from "../context/CartContext";
+import "../styles/components/Cart.scss";
+import BackgroundTree from "../components/BackgroundTree";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -13,6 +16,7 @@ export default function CartPage() {
   const navigate = useNavigate();
   const [isScreenLoading, setIsScreenLoading] = useState(false);
   const [hasNoCart, setHasNoCart] = useState(false);
+  const { removeToCart } = useCart(); // 取得移除購物車的方法
 
   const getCart = async () => {
     setIsScreenLoading(true);
@@ -64,6 +68,7 @@ export default function CartPage() {
           const jsonCookieData = JSON.stringify(newTickListAry.map((item) => JSON.stringify(item)));
           Cookies.set("tickList", jsonCookieData, { expires: 1 });
         }
+        removeToCart();
         getCart();
       }
     // eslint-disable-next-line no-unused-vars
@@ -76,6 +81,7 @@ export default function CartPage() {
   
   return (
     <>
+    <BackgroundTree title={'購物車清單'}/>
     {cart.carts?.length ? 
     (<div className="container">
       <h1>購物車</h1>
@@ -94,7 +100,7 @@ export default function CartPage() {
           {cart.carts.map((cartItem, index) => {
             return (
             <tr key={cartItem.id}>
-              <td><img className='cart-image' src={cartItem.product.imageUrl} alt={cartItem.product.title} /></td>
+              <td><img className='cart-list-image' src={cartItem.product.imageUrl} alt={cartItem.product.title} /></td>
               <td>{cartItem.product.title}</td>
               <td>{cookieData?.[index]?.ticket}</td>
               <td>{`X${cookieData?.[index]?.qty}`}</td>
@@ -104,18 +110,28 @@ export default function CartPage() {
             )
           })}
         </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan="6">
-              <div className="d-flex justify-content-between">
-                <button className="shipping-button" onClick={() => navigate('/mission')}>繼續購物</button>
-                <button className="order-button" onClick={() => navigate('/cartForm')}>下一步</button>
-              </div>
-            </td>
-          </tr>
-        </tfoot>
       </table>
-    </div>) : hasNoCart ? <div className="container" style={{height: '55vh'}}><h1>購物車已空</h1></div> : <div className="container"><h1>購物車清單讀取中</h1></div>}
+      <div className="cart-text-all mt-2 mb-3">
+        <button className="shipping-button cart-shipping-button" onClick={() => navigate('/mission')}>繼續購物</button>
+        <button className="order-button cart-order-button" onClick={() => navigate('/cartForm')}>下一步</button>
+      </div>
+    </div>) : hasNoCart && 
+    <div className="container" style={{
+      height: '55vh', 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center'}}>
+      <h1 style={{
+        fontSize: '2rem', 
+        color: '#ff6f61', 
+        fontWeight: 'bold', 
+        textAlign: 'center', 
+        letterSpacing: '2px', 
+        textShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)'}
+      }>
+        購物車已空
+      </h1>
+    </div>}
     {isScreenLoading && (<div
       className="d-flex justify-content-center align-items-center"
       style={{
