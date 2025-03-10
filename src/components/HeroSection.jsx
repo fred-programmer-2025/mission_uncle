@@ -48,44 +48,46 @@ const HeroSection = () => {
 
   return (
     <div className="hero-section position-relative custom-hero pb-md-5 pt-md-5">
-      <div className="row pt-md-5">
-          {/* 左側背景 - 高度與整體區域相同 */}
-          <div className="col-md-4 position-absolute h-100 d-md-block d-none" style={{ 
-            left: 0,
+      <div className="pt-md-5">
+        <div className="row">
+            {/* 左側背景 - 高度與整體區域相同 */}
+            <div className="col-md-4 position-absolute h-100 d-md-block d-none" style={{ 
+              left: 0,
+              top: 0,
+              backgroundImage: `url(${bgImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              zIndex: 0 
+            }}></div>
+            {/* 手機版上方背景 - 只在手機版顯示 */}
+            <div className="position-absolute w-100 d-md-none d-block" style={{ 
+              height: '50%',
+              top: 0,
+              right: 0,
+              left:0,
+              backgroundImage: `url(${bgImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              zIndex: 0
+            }}></div>
+
+          <div className="col-md-8">
+            {/* 右側灰色背景 - 添加這個元素 */}
+            <div className="position-absolute h-100 d-md-block d-none" style={{ 
+            width: '66.667%',
+            right: 0,
             top: 0,
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundColor: 'rgba(224, 224, 224, 1)', // 灰色背景
             zIndex: 0 
           }}></div>
-          {/* 手機版上方背景 - 只在手機版顯示 */}
+          {/* 手機版下方灰色背景 - 只在手機版顯示 */}
           <div className="position-absolute w-100 d-md-none d-block" style={{ 
             height: '50%',
-            top: 0,
-            right: 0,
-            left:0,
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            bottom: 0,
+            backgroundColor: '#f0f0f0',
             zIndex: 0
           }}></div>
-
-        <div className="col-md-8">
-          {/* 右側灰色背景 - 添加這個元素 */}
-          <div className="position-absolute h-100 d-md-block d-none" style={{ 
-          width: '66.667%',
-          right: 0,
-          top: 0,
-          backgroundColor: 'rgba(224, 224, 224, 1)', // 灰色背景
-          zIndex: 0 
-        }}></div>
-        {/* 手機版下方灰色背景 - 只在手機版顯示 */}
-        <div className="position-absolute w-100 d-md-none d-block" style={{ 
-          height: '50%',
-          bottom: 0,
-          backgroundColor: '#f0f0f0',
-          zIndex: 0
-        }}></div>
+          </div>
         </div>
       </div>
   

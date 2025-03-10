@@ -1,21 +1,26 @@
 @media (max-width: 1800px){
-  .yellow-card-position{
+  .contact-yellow-card-position{
     left: 90% !important;
   }
-
+  .contact-card-text{
+    font-size: 1rem !important;
+  }
+  .mb-adjust{
+    margin-bottom: 1.5rem !important;
+  }
   .photo-card-position{
     right: 32% !important;
   }
 }
 
 @media (max-width: 1680px){
-  .yellow-card-position{
+  .contact-yellow-card-position{
     left: 88% !important;
   }
 }
 
 @media (max-width: 1560px){
-  .yellow-card-position{
+  .contact-yellow-card-position{
     left: 85% !important;
   }
 
@@ -25,32 +30,42 @@
 }
 
 @media (max-width: 1440px){
-  .yellow-card-position{
+  .contact-yellow-card-position{
     left: 78% !important;
   }
 
   .photo-card-position{
     right: 27% !important;
   }
+
+  .contact-tag-text-position{
+    left: 5% !important;
+  } 
 }
 
 @media (max-width: 1200px){
-  .yellow-card-position{
+  .contact-yellow-card-position{
     left: 68% !important;
   }
 
   .photo-card-position{
     right: 25% !important;
   }
+
 }
 
 @media (max-width: 1080px){
-  .yellow-card-position{
+  .contact-yellow-card-position{
     left: 63% !important;
   }
-
   .photo-card-position{
     right: 21% !important;
+  }
+  .contact-card-text{
+    font-size: 0.9rem !important;
+  }
+  .mb-adjust{
+    margin-bottom: 1rem !important;
   }
 }
 
@@ -58,34 +73,135 @@
   .photo-card-position{
     right: 14% !important;
   }
+  .contact-card-text{
+    font-size: 0.8rem !important;
+  }
+  .mb-adjust{
+    margin-bottom: 1rem !important;
+  }
 }
 
 @media (max-width: 768px){
+  .contact-yellow-card-position{
+    left: 72% !important;
+  }
   .photo-card-position{
-    right: 25% !important;
+    right: 15% !important;
+  }
+  .contact-tag-text-position{
+    left: 3% !important;
+  } 
+  .contact-tag-text{
+    font-size: 1.2rem !important;
+  }
+  .contact-card-text{
+    font-size: 1.2rem !important;
+  }
+
+  .contact-btn-text{
+    font-size: 1rem !important;
+  }
+
+  .mb-adjust{
+    margin-bottom: 2rem !important;
+  }
+  .contact-us-bg{
+    min-height: 650px !important;
   }
 }
 
 @media (max-width: 649px){
+  .contact-yellow-card-position{
+    left: 68% !important;
+  }
+
   .photo-card-position{
     right: 18% !important;
   }
 }
 
 @media (max-width: 578px){
+  .contact-yellow-card-position{
+    left: 68% !important;
+  }
   .photo-card-position{
     right: 18% !important;
+  }
+  .contact-tag-text-position{
+    left: 5% !important;
+  }
+  .contact-tag-text{
+    font-size: 1rem !important;
+  }
+  .contact-card-text{
+    font-size: 1rem !important;
+  }
+
+  .contact-btn-text{
+    font-size: 1rem !important;
+  }
+
+  .mb-adjust{
+    margin-bottom: 1.2rem !important;
+  }
+
+  .contact-us-bg{
+    min-height: 500px !important;
   }
 }
 
 @media (max-width: 528px){
   .photo-card-position{
-    right: 11% !important;
+    right: 18% !important;
+  }
+  .contact-tag-text{
+    font-size: 0.9rem !important;
+  }
+  .contact-card-text{
+    font-size: 0.9rem !important;
+  }
+
+  .contact-btn-text{
+    font-size: 0.9rem !important;
+  }
+
+  .mb-adjust{
+    margin-bottom: 1.2rem !important;
   }
 }
 
 @media (max-width: 458px){
-  .photo-card-position{
-    right: 6% !important;
+  .contact-us-bg{
+    min-height: 420px !important;
+  }
+  .contact-card-text{
+    font-size: 0.75rem !important;
+  }
+
+  .contact-btn-text{
+    font-size: 0.75rem !important;
+  }
+  .mb-adjust{
+    margin-bottom: 0.9rem !important;
+  }
+}
+
+@media (max-width: 398px){
+  .contact-tag-text-position{
+    top: -10% !important;
+    left: 6% !important;
+  }
+  .contact-tag-text{
+    font-size: 0.8rem !important;
+  }
+  .contact-card-text{
+    font-size: 0.7rem !important;
+  }
+
+  .contact-btn-text{
+    font-size: 0.7rem !important;
+  }
+  .mb-adjust{
+    margin-bottom: 0.8rem !important;
   }
 }
