@@ -1,0 +1,148 @@
+.about-yellow-card-position{
+  left: 48% !important;
+}
+
+.about-tag-text-position{
+  left: 5% !important;
+  top: -15% !important;
+} 
+
+@media (max-width: 1800px){
+  .about-card-text{
+    font-size: 1rem !important;
+  }
+  .about-mb-adjust{
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+@media (max-width: 1440px){
+  .about-tag-text-position{
+    left: 5% !important;
+    top: -10% !important;
+  } 
+}
+
+@media (max-width: 1200px){
+  .about-card-text{
+    font-size: 0.8rem !important;
+  }
+  .about-mb-adjust{
+    margin-bottom: 1rem !important;
+  }
+  .about-btn-text{
+    font-size: 0.8rem !important;
+  }
+}
+
+
+@media (max-width: 1080px){
+  .about-tag-text-position{
+    left: 7% !important;
+    top: -15% !important;
+  } 
+  .about-card-text{
+    font-size: 0.6rem !important;
+  }
+  .about-mb-adjust{
+    margin-bottom: 0.7rem !important;
+  }
+
+  .about-btn-text{
+    font-size: 0.6rem !important;
+  }
+}
+
+@media (max-width: 900px){
+}
+
+@media (max-width: 768px){
+  .about-uncle-1, .about-uncle-3{
+    width:24% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .about-uncle-2{
+    width:50% !important;
+  }
+  .about-yellow-card-position{
+    left: 50% !important;
+  }
+  .about-tag-text-position{
+    left: 88% !important;
+    top: -0% !important;
+  } 
+  .about-tag-text{
+    font-size: 1.2rem !important;
+  }
+  .about-card-text{
+    font-size: 1.2rem !important;
+  }
+
+  .about-btn-text{
+    font-size: 1.2rem !important;
+  }
+
+  .about-mb-adjust{
+    margin-bottom: 2rem !important;
+  }
+  .about-us-bg{
+    min-height: 650px !important;
+  }
+}
+
+
+@media (max-width: 578px){
+  .about-tag-text-position{
+    left:87% !important;
+  }
+}
+
+@media (max-width: 528px){
+  .about-tag-text{
+    font-size: 1.1rem !important;
+  }
+  .about-card-text{
+    font-size: 1.1rem !important;
+  }
+
+  .about-btn-text{
+    font-size: 1.1rem !important;
+  }
+
+  .about-mb-adjust{
+    margin-bottom: 1.2rem !important;
+  }
+}
+
+@media (max-width: 458px){
+  .about-card-text{
+    font-size: 1rem !important;
+  }
+
+  .about-btn-text{
+    font-size: 1rem !important;
+  }
+  .about-mb-adjust{
+    margin-bottom: 1rem !important;
+  }
+}
+
+@media (max-width: 398px){
+  .about-tag-text-position{
+    left: 85% !important;
+  }
+  .about-tag-text{
+    font-size: 0.9rem !important;
+  }
+  .about-card-text{
+    font-size: 0.9rem !important;
+  }
+
+  .about-btn-text{
+    font-size: 0.9rem !important;
+  }
+  .about-mb-adjust{
+    margin-bottom: 0.9rem !important;
+  }
+}
