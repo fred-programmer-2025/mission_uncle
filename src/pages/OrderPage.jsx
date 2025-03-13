@@ -1,15 +1,24 @@
 import { Row, Col } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import "../styles/components/Cart.scss";
-import BackgroundTree from "../components/BackgroundTree";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import BackgroundTree from "../components/BackgroundTree";
+import "../styles/components/Cart.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
 
 export default function OrderPage() {
   const [order, setOrder] = useState([]);
+  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    });
+  }, []);
+  
   const getOrder = async () => {
     // setIsScreenLoading(true);
     try {
@@ -27,14 +36,6 @@ export default function OrderPage() {
   useEffect(() => {
     getOrder();
   }, [])
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant'
-    });
-  }, []);
 
   return (
     <>

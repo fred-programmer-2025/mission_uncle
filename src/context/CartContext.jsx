@@ -1,4 +1,8 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const API_PATH = import.meta.env.VITE_API_PATH;
 
 // 建立 Context
 const CartContext = createContext();
@@ -7,14 +11,39 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/api/${API_PATH}/cart`);
+        setCartCount(res.data.data.carts.length);
+      } catch (error) {
+        alert(error);
+      }
+    })();
+  }, []);
+  
   // 加入購物車的函式
   const addToCart = () => {
-    setCartCount((prevCount) => prevCount + 1);
+    (async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/api/${API_PATH}/cart`);
+        setCartCount(res.data.data.carts.length);
+      } catch (error) {
+        alert(error);
+      }
+    })();
   };
 
   // 移除購物車的函式
   const removeToCart = () => {
-    setCartCount((prevCount) => prevCount - 1);
+    (async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/api/${API_PATH}/cart`);
+        setCartCount(res.data.data.carts.length);
+      } catch (error) {
+        alert(error);
+      }
+    })();
   };
 
   return (

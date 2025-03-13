@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import ArticlePageStyle from "../styles/ArticlePageStyle";
+import { ClipLoader } from "react-spinners";
 import UncleInfoCard from "../components/UncleInfoCard";
 import Pagination from "../components/Pagination";
+import "../styles/components/ArticlePageStyle.scss";
+import "../styles/components/ArticleBannerStyle.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -76,7 +78,10 @@ export default  function UncleInfoPage() {
   }, []);
 
   return (
-    <ArticlePageStyle>
+    <>
+      <div className="banner d-flex align-items-center justify-content-start">
+        <h2 className="text-start banner-title mb-4">大叔接招</h2>
+      </div>
       <div className="container my-5">
         <div className="row">
           {/* <!-- 卡片 --> */}
@@ -85,8 +90,24 @@ export default  function UncleInfoPage() {
               <UncleInfoCard key={product.id} product={product} length={displayProducts.length}></UncleInfoCard>
             ))
           ) : (
-            <div>
-              <p>⚠️ 尚無資料</p>
+            <div
+              className="d-flex justify-content-center align-items-center"
+              style={{
+                position: "fixed",
+                inset: 0,
+                backgroundColor: "rgba(255,255,255,0.3)",
+                zIndex: 999,
+                fontSize: 20,
+                top: 85,
+              }}
+            >
+              <ClipLoader
+                color={"#000000"}
+                size={30}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+              &nbsp; 讀取中...
             </div>
           )}
         </div>
@@ -96,6 +117,6 @@ export default  function UncleInfoPage() {
         pageInfo={pageInfo}
         handlePageChange={handlePageChange}
       ></Pagination>
-    </ArticlePageStyle>
+    </>
   )
 }

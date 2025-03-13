@@ -1,39 +1,34 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+.container-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 label, p, span, option, .container input, .container button {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-}
-
 .uncle-photo {
   max-width: 636px;
+  min-height: 1180px;
   margin-right: 40px;
-  display: block;
 }
 
 .uncle-info {
   max-width: 416px;
-  max-height: 608px;
   width: 100%;
   height: 100%;
   background-color: #F8F8F9;
   padding: 24px;
-  display: block;
 }
 
-.uncle-info-phone {
-  width: 100%;
-  display: none;
+.uncle-spec-num {
+  margin-top: 8px;
 }
 
 .uncle-price {
@@ -45,21 +40,20 @@ label, p, span, option, .container input, .container button {
   height: 100%;
 }
 
+.uncle-bg-color {
+  background-color: transparent;
+}
+
 .uncle-button {
   margin-top: 24px;
 }
 
-@media (max-width: 768px) {
-  .uncle-photo, .uncle-info {
-    display: none;
-  }
-  .uncle-info-phone {
-    display: block;
-  }
+.section-swiper, .swiper-pagination-bullet, .section-mb-3 {
+  display: none;
 }
 
 .section {
-  &-1, &-iphone {
+  &-1, &-swiper {
     width: 100%;
     height: 100%;
     background-image: url('../../assets/Mission100.jpg');
@@ -75,7 +69,7 @@ label, p, span, option, .container input, .container button {
     padding-top: 24px;
   }
 
-  &-iphone {
+  &-swiper {
     max-height: 347px;
     padding: 26px;
     padding-top: 24px;
@@ -88,6 +82,60 @@ label, p, span, option, .container input, .container button {
 
   &-3 {
     margin-top: 24px;
+    &-content {
+      max-height: 200px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .uncle-photo {
+    display: none;
+  }
+
+  .section-swiper, .swiper-pagination-bullet, .section-mb-3 {
+    display: block;
+  }
+
+  .uncle-mb-info {
+    max-width: none;
+    width: 100%;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .uncle-bg-color {
+    background-color: #F8F8F9;
+  }
+
+  .section-mb-3 {
+    margin-top: 16px;
+  }
+
+  .custom-pagination {
+    margin: 10px 0px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+  
+    .swiper-pagination-bullet {
+      width: 24px;
+      height: 2px;
+      border-radius: 2px;
+      background: #333435;
+  
+      &-active {
+        background: #73DB6A;
+      }
+    }
+  }
+}
+
+.sub-content {
+  margin-top: 10px;
+  
+  label {
+    display: block;
   }
 }
 
@@ -123,11 +171,7 @@ label, p, span, option, .container input, .container button {
   }
 }
 
-.sub-content {
-  margin-top: 10px;
-}
-
-p.info, p.service-info {
+p.info-1, p.info-2, p.info-3 {
   padding: 40px;
   font-size: 16px;
   font-weight: 500;
@@ -135,16 +179,16 @@ p.info, p.service-info {
   margin-top: -24px;
 }
 
-p.info {
+p.info-1, p.info-2 {
   background-color: #FEFAC1;
 }
 
-p.service-info {
+p.info-3 {
   background-color: #F8F8F9;
 }
 
 label {
-  &.info, &.spec-info {
+  &.info-1, &.info-2, &.info-3 {
     border: 1px solid #000;
     background-color: #F8F8F9;
     padding: 8px 12px;
@@ -156,11 +200,11 @@ label {
     white-space: nowrap;
   }
 
-  &.info {
+  &.info-1, &.info-3 {
     width: 90px;
   }
 
-  &.spec-info {
+  &.info-2 {
     width: 124px;
   }
 
@@ -184,16 +228,16 @@ label {
     line-height: 24px;
   }
 
-  &.content-price {
+  &.content-spec, &.content-price {
     font-size: 20px;
     font-weight: 700;
-    line-height: 24px;
+    line-height: 28px;
     color: #5CAF55;
   }
-}
 
-.sub-title-content label {
-  display: block;
+  &.content-spec {
+    line-height: 56px;
+  }
 }
 
 span.tag {
@@ -206,20 +250,9 @@ span.tag {
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
-  margin: 6px;
+  margin: 6px 0px;
   text-align: center;
   white-space: nowrap;
-}
-
-select {
-  width: 100%;
-  height: 48px;
-  padding: 8px;
-  background-color: #F8F8F9;
-  border: 1px solid #9B9B9B;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .quantity-container {
@@ -327,24 +360,6 @@ select {
 
 .swiper-button-next {
   right: 0px; /* 向右移 */
-}
-
-.custom-pagination {
-  margin: 10px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-
-  .swiper-pagination-bullet {
-    width: 24px;
-    height: 2px;
-    border-radius: 2px;
-    background: #333435;
-
-    &-active {
-      background: #73DB6A;
-    }
-  }
 }
 
 .table th, .table td {
