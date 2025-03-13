@@ -1,16 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { Modal } from "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
-// import ArticlePageStyle from "../styles/ArticlePageStyle";
-// import ArticleBannerStyle from "../styles/ArticleBannerStyle";
 import { ClipLoader } from "react-spinners";
-import "../styles/ArticlePageStyle.scss";
-import "../styles/ArticleBannerStyle.scss";
-import Pagination from "../components/Pagination";
+import axios from "axios";
 import ArticleDetailModal from "../components/ArticleDetailModal";
 import Card from "../components/Card";
+import Pagination from "../components/Pagination";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+import "../styles/components/ArticlePageStyle.scss";
+import "../styles/components/ArticleBannerStyle.scss";
 
 const url = import.meta.env.VITE_BASE_URL;
 const path = import.meta.env.VITE_API_PATH;
@@ -40,7 +37,6 @@ function ArticlePage() {
 
   const handlePageChange = (page, articlesData = apiArticles) => {
     if (!articlesData || articlesData.length === 0) {
-      console.log("⚠️ 沒有文章資料！");
       return;
     }
 
@@ -69,7 +65,6 @@ function ArticlePage() {
         const response = await axios.get(
           `${url}/api/${path}/articles?page=${page}`
         );
-        console.log(response);
         allArticles = [...allArticles, ...response.data.articles];
         if (!response.data.pagination.has_next) {
           hasNext = false;
@@ -77,7 +72,6 @@ function ArticlePage() {
           page += 1;
         }
       } catch (error) {
-        console.error(error.response?.data?.message || error.message);
         hasNext = false;
       }
     }
@@ -85,6 +79,7 @@ function ArticlePage() {
     setApiArticles(allArticles); // 儲存所有文章
     handlePageChange(1, allArticles); // 預設顯示第 1 頁
   };
+
   useEffect(() => {
     getArticles();
   }, []);
@@ -98,7 +93,7 @@ function ArticlePage() {
       const response = await axios.get(`${url}/api/${path}/article/${id}`);
       return response.data;
     } catch (error) {
-      console.error(error.response.data.message);
+      alert(error);
     }
   };
   //ArticleDetailModal關閉狀態
@@ -116,13 +111,10 @@ function ArticlePage() {
 
   return (
     <>
-      {/* <ArticleBannerStyle> */}
       <div className="banner d-flex align-items-center justify-content-start">
-        <h2 className="text-start banner-title  mb-4">精選文章</h2>
+        <h2 className="text-start banner-title mb-4">精選文章</h2>
       </div>
-      {/* </ArticleBannerStyle> */}
       {/* <!-- 主要內容 -------------------------> */}
-      {/* <ArticlePageStyle> */}
       <div className="container my-5">
         <div className="row">
           {/* <!-- 文章卡片 --> */}
@@ -161,9 +153,7 @@ function ArticlePage() {
           handlePageChange={handlePageChange}
         ></Pagination>
       </div>
-      {/* </ArticlePageStyle> */}
       {/* <!-- 頁腳 --> */}
-
       {/** modal */}
       <ArticleDetailModal
         tempArticle={tempArticle}

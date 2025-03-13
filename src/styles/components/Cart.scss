@@ -1,18 +1,16 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+.container-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 label, h1, p, option, th, td, .container input, .container button {
   font-family: 'Noto Sans TC', sans-serif;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0;
 }
 
 .order-info {
@@ -86,10 +84,10 @@ label, h1, p, option, th, td, .container input, .container button {
   }
 
   &-all {
-    flex: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
     height: 100%;
   }
 }
@@ -147,7 +145,7 @@ label, h1, p, option, th, td, .container input, .container button {
   justify-content: space-between;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .cartForm-container {
     flex-direction: column-reverse;
   }
@@ -201,7 +199,7 @@ label, h1, p, option, th, td, .container input, .container button {
     }
     
     &-qty, &-price {
-      font-size: 12px;
+      font-size: 14px;
     }
   }
 
