@@ -121,6 +121,7 @@ function ArticlePage() {
           {displayArticles && displayArticles.length > 0 ? (
             displayArticles.map((article) => (
               <Card
+                key={article.id}
                 article={article}
                 handleOpenArticleDetailModal={handleOpenArticleDetailModal}
               ></Card>
