@@ -65,6 +65,7 @@ function ArticlePage() {
         const response = await axios.get(
           `${url}/api/${path}/articles?page=${page}`
         );
+
         allArticles = [...allArticles, ...response.data.articles];
         if (!response.data.pagination.has_next) {
           hasNext = false;
