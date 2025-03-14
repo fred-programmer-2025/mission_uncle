@@ -1,0 +1,108 @@
+.fan-reviews {
+
+  .text-star{
+    color: rgba(115, 219, 106, 1) !important;
+  }
+  .border-adjust {
+    border-width: 1.5px !important;
+  }
+
+  // 手機版卡片樣式
+  @media (max-width: 767.98px) {
+    .mobile-reviews {
+      width: 500px;
+      min-height: 220px; // 確保容器有足夠高度
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .mobile-card-container {
+      position: relative;
+      width: 100%;
+      min-height: 220px;
+    }
+
+    .mobile-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+      transform: translateY(20px);
+      z-index: 1;
+      
+      &.active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        z-index: 2;
+      }
+
+      .card-content {
+        width: 80%;
+        max-width: 350px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .sticker-wrapper {
+        position: absolute;
+        top: -15px;
+        left: 10px;
+        width: 60px;
+        height: 20px;
+        z-index: 3;
+      }
+    }
+
+    // 確保導航點的間距一致
+    .btn-sm {
+      margin: 0 5px;
+    }
+  }
+
+  @media (max-width: 500px){
+    .mobile-reviews {
+      width: 350px;
+      padding-top: 40px;
+      left: -10% !important;
+    }
+
+    .fans-reviews-title-position{
+      top: -25px !important;
+      left: 38% !important;
+    }
+
+    .radio-position{
+      position: relative;
+      left: -10% !important;
+    }
+  }
+
+  @media (max-width: 456px){
+    .mobile-reviews {
+      width: 300px;
+      padding-top: 40px;
+      left: -10% !important;
+    }
+  }
+
+  @media (max-width: 406px){
+    .mobile-reviews {
+      width: 250px;
+      padding-top: 40px;
+      left: -10% !important;
+    }
+  }
+
+  
+  // 較大的手機和平板
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .mobile-card .card-content {
+      width: 70%;
+    }
+  }
+}
