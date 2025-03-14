@@ -180,7 +180,7 @@ const HeroSection = () => {
                     </div>
                     </div>
                     {/* 黃色卡片內容 */}
-                    <div className="position-relative">
+                    <div className="position-relative yellow-card-content-position">
                       <img 
                         src={titleBg} 
                         alt="背景" 
@@ -215,7 +215,7 @@ const HeroSection = () => {
                   <img 
                     src={item.background}
                     alt={item.description}
-                    className="img-fluid w-100"
+                    className="img-fluid w-100 border border-dark border-2"
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
@@ -281,16 +281,16 @@ const HeroSection = () => {
                         <img 
                           src={item.titleImage} 
                           alt="陪伴是最溫暖的支持" 
-                          className="img-fluid mb-2"
+                          className="img-fluid mb-2 yellow-card-title"
                           style={{ maxWidth: '70%' }}
                         />
-                        <p className="mb-2 fw-bold mb-4" style={{ 
+                        <p className="mb-4 fw-bold" style={{ 
                           fontSize: 'clamp(14px, calc(14px + (26 - 14) * ((100vw - 375px) / (768 - 375))), 26px)',
                           lineHeight: '1.4'
                         }}>
                           {item.subText}
                         </p>
-                        <button className="btn w-100 btn-sm mb-adjust rounded-0 border border-dark text-dark fw-bold p-2" style={{ backgroundColor: 'rgba(115, 219, 106, 1)', color: 'white' }}>
+                        <button className="btn w-100 btn-sm rounded-0 border border-dark text-dark fw-bold p-2" style={{ backgroundColor: 'rgba(115, 219, 106, 1)', color: 'white' }}>
                           {item.buttonText}  &gt;
                         </button>
                       </div>

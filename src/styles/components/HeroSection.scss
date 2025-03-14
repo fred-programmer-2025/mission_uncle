@@ -255,6 +255,24 @@
     left: 50% !important;
     transform: translateX(-50%); /* 確保按鈕完全居中 */
   }
+  .mb-adjust{
+    margin-bottom: -200px !important;
+  }
+
+  // .yellow-card-title{
+  //   position: relative !important;
+  //   top: 40px !important;
+  //   width: 60% !important;
+  // }
+
+  // .yellow-card-text{
+  //   position: relative !important;
+  //   top: 40px !important;
+  //   width: 60% !important;
+  // }
+  .yellow-card-content-position{  
+    top: 500px !important;
+  }
 }
 
 @media (max-width: 649px){
