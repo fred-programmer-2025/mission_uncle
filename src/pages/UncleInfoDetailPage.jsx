@@ -15,6 +15,14 @@ import "../styles/components/ArticleBannerStyle.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
+const UNCLE_INTRO_DATA = {
+  '阿哲': "擁有20年以上人生閱歷，溫柔耐心，善於與人溝通，最喜歡幫助他人解決問題。無論是陪伴長者、協助雜務，還是成為談心的對象，都會以專業和細心滿足您的需求。",
+  '阿豪': "為人豪爽，專長水電、木工，能迅速解決您的居家大小維修問題。",
+  'Jason': "為人精明，兼具美感，專長平面設計與網頁設計，是設計需求的不二選擇。",
+  '順仔': "為人親切雞婆，熟悉各大市場，專長外送與代購，是您居家生活的好助手。",
+  '寶哥': "為人開朗，擁有豐富的高階主管經驗，專長管理、問題分析，是企業諮詢的良師益友。",
+  '李P': "為人聰明博學，專長心理諮商與演講，協助解開心理困惑，啟發新生活思維。"
+}
 
 export default function UncleInfoDetailPage() {
   const [product, setProduct] = useState(null);
@@ -110,7 +118,7 @@ export default function UncleInfoDetailPage() {
           <div className='section-3'>
             <div className='section-3-content'>
               <label className='info-1' htmlFor="">大叔介紹</label>
-              <p className='info-1'>擁有 20 年以上人生閱歷，溫柔耐心，善於與人溝通，最喜歡幫助他人繁决問題。無論是陪伴長者、協助機務，還是成為成為談心的對象，都會以專業和細心滿足您的需求。</p>
+              <p className='info-1'>{UNCLE_INTRO_DATA[product?.title.replace(/\(.*$/, "")]}</p>
             </div>
             <div className='section-3-content'>
               <label className='info-2' htmlFor="">產品規格介紹</label>
@@ -118,7 +126,7 @@ export default function UncleInfoDetailPage() {
             </div>
             <div className='section-3-content'>
               <label className='info-3' htmlFor="">服務聲明</label>
-              <p className='info-3'>大叔提供合法、安全的協助服務,內容依平台規範進行，非專業需求請謹慎選擇。服務過程如因不可抗力造成問題，平台將協助處理，但不負最終責任。</p>
+              <p className='info-3'>大叔提供合法、安全的協助服務，內容依平台規範進行，非專業需求請謹慎選擇。服務過程如因不可抗力造成問題，平台將協助處理，但不負最終責任。</p>
             </div>
           </div>
         </div>
@@ -166,7 +174,7 @@ export default function UncleInfoDetailPage() {
             <div className='section-mb-3'>
               <div className='section-mb-3-content'>
                 <label className='info-1' htmlFor="">大叔介紹</label>
-                <p className='info-1'>擁有 20 年以上人生閱歷，溫柔耐心，善於與人溝通，最喜歡幫助他人繁决問題。無論是陪伴長者、協助機務，還是成為成為談心的對象，都會以專業和細心滿足您的需求。</p>
+                <p className='info-1'>{UNCLE_INTRO_DATA[product?.title.replace(/\(.*$/, "")]}</p>
               </div>
               <div className='section-mb-3-content'>
                 <label className='info-2' htmlFor="">產品規格介紹</label>
@@ -208,7 +216,7 @@ export default function UncleInfoDetailPage() {
             <div className='section-mb-3'>
               <div className='section-mb-3-content'>
                 <label className='info-3' htmlFor="">服務聲明</label>
-                <p className='info-3'>大叔提供合法、安全的協助服務,內容依平台規範進行，非專業需求請謹慎選擇。服務過程如因不可抗力造成問題，平台將協助處理，但不負最終責任。</p>
+                <p className='info-3'>大叔提供合法、安全的協助服務，內容依平台規範進行，非專業需求請謹慎選擇。服務過程如因不可抗力造成問題，平台將協助處理，但不負最終責任。</p>
               </div>
             </div>
           </div>

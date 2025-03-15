@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Modal } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-function ArticleDetailModal({ tempArticle, getArticles, isOpen, setIsOpen }) {
+function ArticleDetailModal({ tempArticle, isOpen, setIsOpen }) {
   //modal page
   const ArticleDetailModalRef = useRef(null);
   
@@ -44,7 +44,7 @@ function ArticleDetailModal({ tempArticle, getArticles, isOpen, setIsOpen }) {
           </div>
           <div className="modal-body">
             <img
-              src={tempArticle?.image}
+              src={tempArticle?.image || undefined}
               className="card-img-top primary-image"
               alt="主圖"
             />

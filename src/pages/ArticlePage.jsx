@@ -121,6 +121,7 @@ function ArticlePage() {
           {displayArticles && displayArticles.length > 0 ? (
             displayArticles.map((article) => (
               <Card
+                key={article.id}
                 article={article}
                 handleOpenArticleDetailModal={handleOpenArticleDetailModal}
               ></Card>
@@ -143,15 +144,17 @@ function ArticlePage() {
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
-              &nbsp; 讀取中...
             </div>
           )}
         </div>
         {/* <!-- 分頁 --> */}
+        {displayArticles && displayArticles.length > 0 ? (
         <Pagination
           pageInfo={pageInfo}
           handlePageChange={handlePageChange}
         ></Pagination>
+        ) : ("")
+        }
       </div>
       {/* <!-- 頁腳 --> */}
       {/** modal */}
