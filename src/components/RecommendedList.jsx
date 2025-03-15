@@ -185,8 +185,8 @@ const RecommendedList = () => {
                       backgroundImage: `url(${textBgImage})`,
                       backgroundSize: "cover",
                       width: "334px",
-                      height: "200px",
-                      top: "25px",
+                      height: "185px",
+                      top: "20px",
                       left: "-40px",
                       zIndex: -3
                     }}></div>

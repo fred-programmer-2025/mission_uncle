@@ -180,7 +180,7 @@ const HeroSection = () => {
                     </div>
                     </div>
                     {/* 黃色卡片內容 */}
-                    <div className="position-relative yellow-card-content-position">
+                    <div className="position-relative">
                       <img 
                         src={titleBg} 
                         alt="背景" 
@@ -277,14 +277,14 @@ const HeroSection = () => {
                           height: 'clamp(230px, 45vw, 350px)'
                         }}
                       />
-                      <div className="position-absolute top-0 left-0 w-100 h-100 p-3 d-flex flex-column justify-content-center">
+                      <div className="position-absolute left-0 w-100 h-100 p-3 d-flex flex-column justify-content-center yellow-card-content-position">
                         <img 
                           src={item.titleImage} 
                           alt="陪伴是最溫暖的支持" 
                           className="img-fluid mb-2 yellow-card-title"
                           style={{ maxWidth: '70%' }}
                         />
-                        <p className="mb-4 fw-bold" style={{ 
+                        <p className="fw-bold hero-mb-adjust" style={{ 
                           fontSize: 'clamp(14px, calc(14px + (26 - 14) * ((100vw - 375px) / (768 - 375))), 26px)',
                           lineHeight: '1.4'
                         }}>
