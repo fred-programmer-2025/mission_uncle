@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "../styles/components/Navbar.scss";
 import uncleLogo from "../assets/Logo.svg";
 import cartIcon from "../assets/cart_icon.svg";
+import { useCart } from "../context/CartContext"; // 使用購物車狀態
 
 const closeIcon = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,6 +22,8 @@ const Navbar = () => {
     const toggleMenu = () => {
       setMenuOpen(!menuOpen);
     };
+
+    const { cartCount } = useCart(); // 取得購物車數量
   return (
     <>
       <nav className={`navbar navbar-expand-xxl navbar-light d-none d-md-block ${
@@ -37,7 +40,29 @@ const Navbar = () => {
             <Link className="me-4 fw-bold text-dark text-decoration-none navbar-link" to="/mission">大叔接招</Link>
             <Link className="me-4 fw-bold text-dark text-decoration-none navbar-link" to="/articles">精選文章</Link>
             <Link className="cart-icon-link" to="/cart">
-              <img src={ cartIcon } alt="" />
+              <img src={ cartIcon } alt="購物車" />
+              {/* 如果購物車有東西，就顯示數量徽章 */}
+              {cartCount > 0 && (
+              <span
+                style={{
+                  position: "absolute",
+                  top: "-8px",
+                  right: "-8px",
+                  backgroundColor: "#73DB6A",
+                  color: "white",
+                  width: "20px",
+                  height: "20px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "50%",
+                  fontSize: "12px",
+                  fontWeight: "bold",
+                }}
+              >
+                {cartCount}
+              </span>
+              )}
             </Link>
           </div>
         </div>
@@ -57,6 +82,28 @@ const Navbar = () => {
           {/* 購物車 */}
           <Link className="cart-icon-link ms-auto" to="/cart">
             <img src={ cartIcon } alt="購物車" />
+            {/* 如果購物車有東西，就顯示數量徽章 */}
+            {cartCount > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: "-8px",
+                right: "-8px",
+                backgroundColor: "#73DB6A",
+                color: "white",
+                width: "20px",
+                height: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "50%",
+                fontSize: "12px",
+                fontWeight: "bold",
+              }}
+            >
+              {cartCount}
+            </span>
+            )}
           </Link>
         </div>
 
@@ -77,8 +124,6 @@ const Navbar = () => {
         </div>
       </nav>
     </>
-
-    
   );
 };
 
