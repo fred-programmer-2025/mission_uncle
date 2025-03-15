@@ -18,6 +18,7 @@ export default function CartFormPage() {
   const [isScreenLoading, setIsScreenLoading] = useState(false);
   const navigate = useNavigate();
   const { setCartCount } = useCart();
+  const [color, setColor] = useState("#9B9B9B"); // 設定預設文字顏色
   
   useEffect(() => {
     window.scrollTo({
@@ -69,6 +70,14 @@ export default function CartFormPage() {
     }
   };
 
+  const handleChange = (el) => {
+    const selectedValue = el.target.value;
+    // 根據選擇的選項設定文字顏色
+    if (selectedValue !== "") {
+      setColor("black");
+    }
+  };
+
   return (
     <>
       <div className="banner d-flex align-items-center justify-content-start">
@@ -81,7 +90,7 @@ export default function CartFormPage() {
             {/* 訂購表單 - 使用handleSubmit包裝onSubmit函數 */}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
-                <label htmlFor="email" className="mb-2">
+                <label htmlFor="email" className="mb-2" style={{fontSize: '16px', fontWeight: '500'}}>
                     電子郵件<span className="text-danger">*</span>
                 </label>
                 <input
@@ -104,7 +113,7 @@ export default function CartFormPage() {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="name" className="mb-2">
+                <label htmlFor="name" className="mb-2" style={{fontSize: '16px', fontWeight: '500'}}>
                     訂購人姓名<span className="text-danger">*</span>
                 </label>
                 <input
@@ -121,7 +130,7 @@ export default function CartFormPage() {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="tel" className="mb-2">
+                <label htmlFor="tel" className="mb-2" style={{fontSize: '16px', fontWeight: '500'}}>
                     訂購人電話<span className="text-danger">*</span>
                 </label>
                 <input
@@ -144,7 +153,7 @@ export default function CartFormPage() {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="payment">
+                <label htmlFor="payment" style={{fontSize: '16px', fontWeight: '500'}}>
                     請選擇付款方式<span className="text-danger">*</span>
                 </label>
                 
@@ -154,6 +163,8 @@ export default function CartFormPage() {
                   className={`form-select form-custom ${errors.payment && "is-invalid"}`}
                   name="payment"
                   defaultValue="" // 確保初始值是空的
+                  onClick={handleChange}
+                  style={{color}}
                 >
                   <option value="" disabled>請選擇付款方式</option>
                   <option value="WebATM">WebATM</option>
@@ -168,7 +179,7 @@ export default function CartFormPage() {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="message">其他需求</label>
+                <label htmlFor="message" style={{fontSize: '16px', fontWeight: '500'}}>其他需求</label>
                 <textarea
                   {...register("message")}
                   id="message"
@@ -198,7 +209,7 @@ export default function CartFormPage() {
         {/* 訂單明細 */}
         <div className="cart-info">
           <div className="cart-content">
-            <div><label style={{fontSize: '20px'}}>訂單明細</label></div>
+            <div><label style={{fontSize: '20px', fontWeight: '700'}}>訂單明細</label></div>
             {cart?.carts?.length &&
               (cart.carts.map((cartItem) => {
                 return (
@@ -212,7 +223,7 @@ export default function CartFormPage() {
                         </div>
                         <label className="cart-text-qty">{`X${cartItem.qty}`}</label>
                       </div>
-                      <label className="cart-price">{`NT ${cartItem.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
+                      <label className="cart-text-price">{`NT ${cartItem.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
                     </div>
                   </div>
                 )

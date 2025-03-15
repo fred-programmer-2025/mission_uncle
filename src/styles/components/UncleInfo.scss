@@ -9,7 +9,7 @@
   justify-content: center;
 }
 
-label, p, span, option, .container input, .container button {
+label, p, span, option, .container-layout input, .container-layout button {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
@@ -365,8 +365,4 @@ span.tag {
 .table th, .table td {
   width: 16%;
   text-align: center; /* 讓內容置中 */
-}
-
-.cart-image {
-  width: 100%;
 }

@@ -9,7 +9,7 @@
   justify-content: center;
 }
 
-label, h1, p, option, th, td, .container input, .container button {
+label, h1, p, option, th, td, .container-layout input, .container-layout button {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
@@ -40,7 +40,8 @@ label, h1, p, option, th, td, .container input, .container button {
 }
 
 .cart-image {
-  width: 120px;
+  max-width: 120px;
+  width: 100%;
   height: 120px;
 }
 
@@ -48,6 +49,7 @@ label, h1, p, option, th, td, .container input, .container button {
   display: flex;
   align-items: stretch;
   gap: 10px;
+  width: 100%;
   height: 136px;
   border-bottom: 1px solid #E0E0E0;
   padding-bottom: 15px;
@@ -96,9 +98,17 @@ label, h1, p, option, th, td, .container input, .container button {
   border-bottom: 1px solid #E0E0E0;
 }
 
-.form-custom {
+.form-control.form-custom, .form-select.form-custom {
   background-color: #F8F8F9;
   border: 1px solid #9B9B9B;
+}
+
+.form-control.form-custom::placeholder {
+  color: #9B9B9B;
+}
+
+.form-select.form-custom option {
+  color: #000000;
 }
 
 .shipping-button, .shipping-button-2, .order-button {
@@ -107,7 +117,7 @@ label, h1, p, option, th, td, .container input, .container button {
   border: 1px solid #9B9B9B;
 }
 
-.shipping-button, .order-button, .shipping-button .cartForm, .order-button .cartForm {
+.shipping-button, .order-button, .shipping-button.cartForm, .order-button.cartForm {
   max-width: 200px;
   width: 100%;
 }
@@ -150,13 +160,21 @@ label, h1, p, option, th, td, .container input, .container button {
     flex-direction: column-reverse;
   }
 
+  .order-info {
+    max-width: none;
+    margin-top: 20px;
+    padding: 0;
+  }
+
   .cart-image {
-    width: 80px;
+    max-width: 80px;
+    width: 100%;
     height: 80px;
   }
 
   .cart-info {
     max-width: none;
+    padding: 0;
   }
 
   .cart-list {
@@ -195,7 +213,7 @@ label, h1, p, option, th, td, .container input, .container button {
 
   .cart-text {
     &-name, &-ticket {
-      font-size: 16px;
+      font-size: 18px;
     }
     
     &-qty, &-price {

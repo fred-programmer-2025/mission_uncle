@@ -43,8 +43,8 @@
     transition: opacity 0.3s ease-in-out;
 
     /* 使用 PNG 當遮罩 */
-    -webkit-mask-image: url("../assets/Group.png");
-    mask-image: url("../assets/Group.png");
+    -webkit-mask-image: url("../../assets/Group.png");
+    mask-image: url("../../assets/Group.png");
 
     /* 控制遮罩的大小與位置 */
     -webkit-mask-size: cover;
