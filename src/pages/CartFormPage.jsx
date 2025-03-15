@@ -50,6 +50,7 @@ export default function CartFormPage() {
 
   // 定義onSubmit函數，由handleSubmit包裝
   const onSubmit = (data) => {
+    setIsSubmitted(true); // 設定提交狀態，顯示錯誤訊息
     const { message, ...user } = data;
     user.address = user.address || "預設地址";
     const userInfo = { data: { user, message } };
