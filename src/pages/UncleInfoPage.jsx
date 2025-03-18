@@ -87,7 +87,7 @@ export default  function UncleInfoPage() {
           {/* <!-- 卡片 --> */}
           {displayProducts && displayProducts.length > 0 ? (
             displayProducts.map((product) => (
-              <UncleInfoCard key={product.id} product={product} length={displayProducts.length}></UncleInfoCard>
+              <UncleInfoCard key={product.id} product={product}></UncleInfoCard>
             ))
           ) : (
             <div
@@ -107,16 +107,18 @@ export default  function UncleInfoPage() {
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
-              &nbsp; 讀取中...
             </div>
           )}
         </div>
       </div>
       {/* <!-- 分頁 --> */}
-      <Pagination
-        pageInfo={pageInfo}
-        handlePageChange={handlePageChange}
-      ></Pagination>
+      {displayProducts && displayProducts.length > 0 ? ( 
+        <Pagination
+          pageInfo={pageInfo}
+          handlePageChange={handlePageChange}
+        ></Pagination>
+      ) : ("")
+      }
     </>
   )
 }

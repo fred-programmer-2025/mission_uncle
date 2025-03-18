@@ -73,7 +73,6 @@ export default function CartPage() {
       </div>
       {cart?.carts?.length ? 
       (<div className="container container-layout">
-        <h1>購物車</h1>
         <table className="table align-middle mt-4">
           <thead>
             <tr>

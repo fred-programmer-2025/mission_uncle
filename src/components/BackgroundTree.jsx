@@ -1,9 +1,9 @@
 import "../styles/components/BackgroundTree.scss";
 
-export default function BackgroundTree({ title }) {
+export default function BackgroundTree() {
     return (
         <div className="background">
-            <div className="title">{title}</div>
+            <label>謝謝您的購物</label>
         </div>
     );
 }

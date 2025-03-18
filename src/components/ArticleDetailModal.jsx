@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Modal } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-function ArticleDetailModal({ tempArticle, getArticles, isOpen, setIsOpen }) {
+function ArticleDetailModal({ tempArticle, isOpen, setIsOpen }) {
   //modal page
   const ArticleDetailModalRef = useRef(null);
 
@@ -43,13 +43,11 @@ function ArticleDetailModal({ tempArticle, getArticles, isOpen, setIsOpen }) {
             ></button>
           </div>
           <div className="modal-body">
-            {tempArticle.image && (
-              <img
-                src={tempArticle.image}
-                className="card-img-top primary-image"
-                alt="主圖"
-              />
-            )}
+            <img
+              src={tempArticle?.image || undefined}
+              className="card-img-top primary-image"
+              alt="主圖"
+            />
             <div className="card-body">
               <p className="card-text">{tempArticle?.description}</p>
               <p className="card-text">{tempArticle?.content}</p>

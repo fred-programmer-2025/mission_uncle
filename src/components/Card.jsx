@@ -1,7 +1,7 @@
 function Card({ article, handleOpenArticleDetailModal }) {
   return (
     <>
-      <div className="col-12 col-md-4 col-xxl-4" key={article.id}>
+      <div className="col-12 col-md-4 col-xxl-4">
         <div className="article-card d-flex flex-row flex-md-column ">
           <div className="w-30 w-md-100 frame">
             <img src={article.image} alt={article.title} />
