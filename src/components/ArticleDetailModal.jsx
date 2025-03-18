@@ -6,7 +6,7 @@ import "bootstrap";
 function ArticleDetailModal({ tempArticle, isOpen, setIsOpen }) {
   //modal page
   const ArticleDetailModalRef = useRef(null);
-  
+
   // modal page
   useEffect(() => {
     new Modal(ArticleDetailModalRef.current, {

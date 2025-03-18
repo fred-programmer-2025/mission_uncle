@@ -9,6 +9,7 @@
   justify-content: center;
 }
 
+
 label, h1, p, option, th, td, .container-layout input, .container-layout button {
   font-family: 'Noto Sans TC', sans-serif;
 }
@@ -42,6 +43,7 @@ label, h1, p, option, th, td, .container-layout input, .container-layout button 
 .cart-image {
   max-width: 120px;
   width: 100%;
+
   height: 120px;
 }
 
@@ -110,12 +112,12 @@ label, h1, p, option, th, td, .container-layout input, .container-layout button 
 .form-select.form-custom option {
   color: #000000;
 }
-
 .shipping-button, .shipping-button-2, .order-button {
   padding: 10px 8px;
   background-color: #E0E0E0;
   border: 1px solid #9B9B9B;
 }
+
 
 .shipping-button, .order-button, .shipping-button.cartForm, .order-button.cartForm {
   max-width: 200px;
@@ -159,6 +161,7 @@ label, h1, p, option, th, td, .container-layout input, .container-layout button 
   .cartForm-container {
     flex-direction: column-reverse;
   }
+
 
   .order-info {
     max-width: none;
