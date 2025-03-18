@@ -1,9 +1,9 @@
 import { Link } from "react-router";
 
-export default function Card({ product, length }) {
+export default function Card({ product }) {
     return (
         <>
-        <div className={`col-12 ${length === 1 ? 'col-md-8 offset-md-2' : length <= 2 ? 'col-md-6' : 'col-md-4'}`}>
+        <div className="col-12 col-md-4 col-xxl-4">
             <div className="article-card d-flex flex-row flex-md-column ">
                 <div className="frame">
                     <img src={product.imageUrl} alt={product.title} />
