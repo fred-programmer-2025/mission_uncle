@@ -62,7 +62,9 @@ export default function CartFormPage() {
       const res = await axios.post(`${BASE_URL}/api/${API_PATH}/order`, data);
       setCartCount(0);
       reset(); // 清空表單
-      navigate("/order");
+      setTimeout(() => {
+        navigate("/order");
+      }, 1000);
     } catch (error) {
       alert("結帳失敗: " + (error.response?.data?.message || error.message));
     } finally {
