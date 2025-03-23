@@ -166,7 +166,7 @@ const RecommendedList = () => {
             <div className="d-md-none">
               {uncles.map((uncle, index) => (
                 <div key={uncle.id} className="mb-4">
-                  <div className="position-relative">
+                  <div className="position-relative display-adjust position-adjust">
 
                     {/* 序號 - 手機版也使用 Dela Gothic One 字體 */}
                     <div className="position-absolute" style={{ 
@@ -186,7 +186,7 @@ const RecommendedList = () => {
                       backgroundSize: "cover",
                       width: "334px",
                       height: "185px",
-                      top: "20px",
+                      top: "25px",
                       left: "-40px",
                       zIndex: -3
                     }}></div>
@@ -206,10 +206,10 @@ const RecommendedList = () => {
                     
                     {/* 了解大叔按鈕 */}
                     <div className="mt-2">
-                      <button className="btn w-100 py-2 fw-bold commended-btn-position" style={{ 
+                      <button className="btn py-2 fw-bold recommended-btn-position recommended-btn-w-adjust" style={{ 
                         backgroundColor: "rgba(115, 219, 106, 1)",
                         border: "1px solid #333",
-                        borderRadius: "0"
+                        borderRadius: "0",
                       }}>
                         了解大叔 &gt;
                       </button>

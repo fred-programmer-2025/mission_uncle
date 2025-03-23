@@ -83,16 +83,29 @@
 @media (max-width: 768px){
   .green-tag{
     top: -40px !important;
-    left: 0px !important;
+    left: 16% !important;
+    display: inline-block !important;
+  }
+
+  .display-adjust{
+    display: inline-block !important;
+  }
+
+  .position-adjust{
+    left: 20% !important;
   }
   .recommended-list-bg{
     width: 180px !important;
     left: 68% !important;
     top: 9.3% !important;
   }
-  .commended-btn-position{
+  .recommended-btn-position{
     position: absolute !important;
-    top: 79.2% !important;
+    top: 63.9% !important;
     left: 20% !important;
+  }
+
+  .recommended-btn-w-adjust{
+    width: 256px !important;
   }
 }
