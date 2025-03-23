@@ -1,64 +1,102 @@
-@media (max-width: 1800px){
+.recommended-list-bg{
+  left: 25% !important;
+}
+.green-tag{
+  left: 6.3% !important;
+}
+
+@media (max-width: 1920px){
   .recommended-list-bg{
-    left: 30% !important;
+    left: 25% !important;
+  }
+  .green-tag{
+    left: 6.3% !important;
   }
 }
 
-@media (max-width: 1680px){
+@media (max-width: 1860px){
+  .green-tag{
+    left: 8.3% !important;
+  }
+}
+
+@media (max-width: 1730px){
   .recommended-list-bg{
-    left: 28% !important;
+    left: 22% !important;
+  }
+
+  .green-tag{
+    left: 6.3% !important;
+  }
+}
+
+@media (max-width: 1640px){
+  .green-tag{
+    left: 8.3% !important;
   }
 }
 
 @media (max-width: 1560px){
   .recommended-list-bg{
-    left: 27% !important;
+    left: 20% !important;
     top: 43% !important;
+  }
+  .green-tag{
+    left: 8.3% !important;
   }
 }
 
 @media (max-width: 1440px){
   .recommended-list-bg{
-    left: 24% !important;
-    top: 42% !important;
-    width: 260px !important;
+    left: 18% !important;
+    top: 45% !important;
+    width: 240px !important;
+  }
+  .green-tag{
+    left: 8.3% !important;
+    top: 15px !important;
+  }
+}
+
+@media (max-width: 1400px){
+  .green-tag{
+    left: 3.3% !important;
+    top: 20px !important;
   }
 }
 
 @media (max-width: 1300px){
   .recommended-list-bg{
-    left: 22% !important;
-    top: 42% !important;
-    width: 265px !important;
+    left: 18% !important;
+    top: 45% !important;
+  }
+  .green-tag{
+    left: 6.3% !important;
+    top: 25px !important;
   }
 }
 
 @media (max-width: 1200px){
-  .recommended-list-bg{
-    left: 20% !important;
-    top: 41% !important;
-    width: 265px !important;
+  .green-tag{
+    left: 1.3% !important;
+    top: 30px !important;
   }
 }
 
-@media (max-width: 1130px){
+@media (max-width: 1100px){
   .recommended-list-bg{
-    left: 17% !important;
-    top: 41% !important;
-    width: 255px !important;
+    left: 18% !important;
+    top: 47% !important;
+    width: 220px !important;
+  }
+  .green-tag{
+    left: 5.3% !important;
+    top: 50px !important;
   }
 }
 
 @media (max-width: 1080px){
   
-}
-
-@media (max-width: 1000px){
-  .recommended-list-bg{
-    left: 13% !important;
-    top: 40% !important;
-    width: 250px !important;
-  }
 }
 
 @media (max-width: 992px){
@@ -107,5 +145,45 @@
 
   .recommended-btn-w-adjust{
     width: 256px !important;
+  }
+}
+
+@media (max-width: 450px){
+  .green-tag{
+    top: -40px !important;
+    left: 16% !important;
+    display: inline-block !important;
+  }
+
+  .display-adjust{
+    display: inline-block !important;
+  }
+
+  .position-adjust{
+    left: 18% !important;
+  }
+
+  .recommended-btn-w-adjust{
+    width: 256px !important;
+  }
+}
+
+@media (max-width: 400px){
+  .green-tag{
+    left: 13% !important;
+  }
+  .position-adjust{
+    left: 15% !important;
+  }
+  .recommended-btn-w-adjust{
+    width: 248px !important;
+  }
+
+  .recommended-btn-position{
+    left: 18% !important;
+  }
+  .text-bg-img-adjust{
+    width: 300px !important;
+    left: -22px !important;
   }
 }

@@ -38,7 +38,7 @@ const RecommendedList = () => {
       <div className="container position-relative py-5" style={{ zIndex: 2 }}>
         <div className="row">
           {/* 左側標題區塊 - 桌面版顯示 */}
-          <div className="col-lg-3 d-none d-lg-block position-relative">
+          <div className="col-lg-3 d-none d-lg-block position-relative green-tag">
             <div className="position-absolute" style={{ top: "-50px", left: "0" }}>
               {/* 綠色標籤 */}
               <div className="mb-4">
@@ -181,7 +181,7 @@ const RecommendedList = () => {
                       {index + 1}
                     </div>
                     {/* 背景圖案 - 文字內容背景 */}
-                    <div className="position-absolute" style={{
+                    <div className="position-absolute text-bg-img-adjust" style={{
                       backgroundImage: `url(${textBgImage})`,
                       backgroundSize: "cover",
                       width: "334px",
