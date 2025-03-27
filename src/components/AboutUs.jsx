@@ -92,7 +92,7 @@ const AboutUs = () => {
               <img 
                 src={aboutUsUncle_2} 
                 alt="遊戲大叔與孩子" 
-                className="img-fluid h-100 object-fit-cover" 
+                className="img-fluid h-100 object-fit-cover w-100" 
                 style={{ 
                   maxHeight: '500px',
                   boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
