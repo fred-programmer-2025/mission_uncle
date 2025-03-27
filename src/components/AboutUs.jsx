@@ -62,12 +62,16 @@ const AboutUs = () => {
                   }}>
                     「大叔出任務」是一個匯集特色大叔的服務平台,專注解決您的生活需求。無論是陪伴長輩、協助購物,或完成其他任務,大叔以真誠態度和豐富經驗提供貼心、合法的服務。不只是出租,更是安心依靠的橋樑。
                   </p>
-                  <button className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2 about-btn-text" 
+                  <a 
+                    href="mailto:info@missionuncle.com"
+                    className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2 about-btn-text text-decoration-none" 
                     style={{ 
                       backgroundColor: 'rgba(115, 219, 106, 1)',
-                    }}>
+                      display: 'block'
+                    }}
+                  >
                     立即聯絡 &gt;
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -155,13 +159,40 @@ const AboutUs = () => {
                     lineHeight: '1.4'
                   }}>
                   「大叔出任務」是一個匯集特色大叔的服務平台,專注解決您的生活需求。無論是陪伴長輩、協助購物,或完成其他任務,大叔以真誠態度和豐富經驗提供貼心、合法的服務。不只是出租,更是安心依靠的橋樑。                  </p>
-                  <button className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2 about-btn-text" 
-                    style={{ 
-                      backgroundColor: 'rgba(115, 219, 106, 1)',
-                      fontSize: 'clamp(10px, 1.5vw, 16px)'
-                    }}>
-                    立即聯絡 &gt;
-                  </button>
+                  <div className="position-relative" style={{ paddingBottom: "2px", paddingRight: "1px" }}>
+                    {/* 陰影背景 - 初始不可見 */}
+                    <div className="position-absolute top-0 left-0 w-100 h-100" style={{
+                      backgroundColor: "#000",
+                      transform: "translate(0px, 0px)",
+                      zIndex: 0,
+                      opacity: 0,
+                      transition: "opacity 0.2s ease"
+                    }}></div>
+                    
+                    {/* 將按鈕改為 a 標籤 */}
+                    <a 
+                      href="mailto:info@missionuncle.com"
+                      className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2 about-btn-text position-relative d-block text-decoration-none"
+                      style={{ 
+                        backgroundColor: 'rgba(115, 219, 106, 1)',
+                        color: 'white',
+                        zIndex: 1,
+                        transition: "background-color 0.3s ease, transform 0.2s ease"
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translate(4px, -2px)";
+                        e.currentTarget.style.backgroundColor = "rgba(165, 238, 157, 1)";
+                        e.currentTarget.parentNode.querySelector("div").style.opacity = "1";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translate(0, 0)";
+                        e.currentTarget.style.backgroundColor = "rgba(115, 219, 106, 1)";
+                        e.currentTarget.parentNode.querySelector("div").style.opacity = "0";
+                      }}
+                    >
+                      立即聯絡 &gt;
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

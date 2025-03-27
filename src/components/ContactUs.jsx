@@ -57,13 +57,40 @@ const ContactUs = () => {
                   }}>
                     如有任何問題或需要協助,歡迎透過客服信箱、電話或線上表單與我們聯繫。我們的客服團隊將提供為您服務,提供專業與貼心的解答,讓您的體驗更順暢。
                   </p>
-                  <button className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2" 
-                    style={{ 
-                      backgroundColor: 'rgba(115, 219, 106, 1)',
-                      fontSize: 'clamp(10px, 1.5vw, 16px)'
-                    }}>
-                    立即聯絡 &gt;
-                  </button>
+                  <div className="position-relative" style={{ paddingBottom: "2px", paddingRight: "1px" }}>
+                    {/* 陰影背景 - 初始不可見 */}
+                    <div className="position-absolute top-0 left-0 w-100 h-100" style={{
+                      backgroundColor: "#000",
+                      transform: "translate(0px, 0px)",
+                      zIndex: 0,
+                      opacity: 0,
+                      transition: "opacity 0.2s ease"
+                    }}></div>
+                    
+                    {/* 將按鈕改為 a 標籤 */}
+                    <a 
+                      href="mailto:info@missionuncle.com"
+                      className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2 about-btn-text position-relative d-block text-decoration-none"
+                      style={{ 
+                        backgroundColor: 'rgba(115, 219, 106, 1)',
+                        color: 'white',
+                        zIndex: 1,
+                        transition: "background-color 0.3s ease, transform 0.2s ease"
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translate(4px, -2px)";
+                        e.currentTarget.style.backgroundColor = "rgba(165, 238, 157, 1)";
+                        e.currentTarget.parentNode.querySelector("div").style.opacity = "1";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translate(0, 0)";
+                        e.currentTarget.style.backgroundColor = "rgba(115, 219, 106, 1)";
+                        e.currentTarget.parentNode.querySelector("div").style.opacity = "0";
+                      }}
+                    >
+                      立即聯絡 &gt;
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="position-relative d-block d-md-none" style={{
@@ -81,12 +108,16 @@ const ContactUs = () => {
                   }}>
                     如有任何問題或需要協助,歡迎透過客服信箱、電話或線上表單與我們聯繫。我們的客服團隊將提供為您服務,提供專業與貼心的解答,讓您的體驗更順暢。
                   </p>
-                  <button className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2 contact-btn-text" 
+                  <a 
+                    href="mailto:info@missionuncle.com"
+                    className="btn w-100 rounded-0 border border-dark text-dark fw-bold p-2 contact-btn-text text-decoration-none" 
                     style={{ 
                       backgroundColor: 'rgba(115, 219, 106, 1)',
-                    }}>
+                      display: 'block'
+                    }}
+                  >
                     立即聯絡 &gt;
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
