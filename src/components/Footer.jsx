@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="col-md-10 col-12 text-center text-md-end ms-md-auto">
             <div>
               <Link to="https://github.com/fred-programmer-2025/mission_uncle" target="_blank" className="text-dark text-decoration-none fw-bold me-3">GitHub</Link>
-              <Link to="/admin" target="_blank" className="text-dark text-decoration-none fw-bold">管理後台</Link>
+              <Link to="https://fred-programmer-2025.github.io/mission_uncle_backend/" target="_blank" className="text-dark text-decoration-none fw-bold">管理後台</Link>
             </div>
             <p className="mb-0 mt-1 fw-bold" style={{ fontSize: "12px" }}>Copyright © 2024 大叔出任務 All Rights Reserved.</p>
           </div>
