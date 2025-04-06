@@ -73,7 +73,6 @@ export default function OrderPage() {
         <BackgroundTree />
         <div className="border" style={{maxWidth: '692px', width: '100%', padding: '12px', margin: '10px 0'}}>
           <div key={orderDatas.order?.id}>
-            <div md={4}>
             {orderDatas.products?.map((product) => {
               return (
               <div key={product.productData.id} className="d-flex align-items-center my-3">
@@ -90,62 +89,60 @@ export default function OrderPage() {
                   <label className="cart-text-ticket">{product.productData.unit}</label>
                   <p className="cart-text-price">{`NT ${product.productData.price.toLocaleString({ style: 'currency', currency: 'TWD' })} X ${product.qty}`}</p>
                 </div>
-                )}
+              </div>
               )}
-              </div>
-              <div md={4}>
-                <ul className="list-unstyled">
-                  <li className="d-flex justify-content-between">
-                    <label className="fw-normal">電子郵件</label>
-                    <label className="fw-normal">{order.user?.email || "N/A"}</label>
-                  </li>
-                  <li className="d-flex justify-content-between">
-                    <label className="fw-normal">收件人姓名</label>
-                    <label className="fw-normal">{order.user?.name || "N/A"}</label>
-                  </li>
-                  <li className="d-flex justify-content-between">
-                    <label className="fw-normal">收件人電話</label>
-                    <label className="fw-normal">{order.user?.tel || "N/A"}</label>
-                  </li>
-                  <hr />
-                  <li className="d-flex justify-content-between">
-                    <label className="fw-normal">付款金額</label>
-                    <label className="fw-normal">{`NT ${order?.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
-                  </li>
-                  <li className="d-flex justify-content-between">
-                    <label className="fw-normal">付款方式</label>
-                    <label className="fw-normal">{order.user?.payment || "N/A"}</label>
-                  </li>
-                  <li className="d-flex justify-content-between">
-                    <label className="fw-normal">付款狀態</label>
-                    <label
-                      className={
-                        order?.is_paid === true
-                          ? "text-success"
-                          : "text-danger fw-bold"
-                      }
-                    >
-                      {order?.is_paid ? "已付款" : "未付款"}
-                    </label>
-                  </li>
-                </ul>
-              </div>
-              <div className="d-flex justify-content-between">
-                <span></span>
-                <button className="order-button cart-order-button" onClick={() => handleCheckOut(order.id)}>
-                  確認付款
-                  {isLoading && <ClipLoader 
-                    color={'#000000'}
-                    size={15}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                    />
-                  }
-                </button>
-              </div>
-            </div>
             )}
-          )}
+            <div md={4}>
+              <ul className="list-unstyled">
+                <li className="d-flex justify-content-between">
+                  <label className="fw-normal">電子郵件</label>
+                  <label className="fw-normal">{order.user?.email || "N/A"}</label>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <label className="fw-normal">收件人姓名</label>
+                  <label className="fw-normal">{order.user?.name || "N/A"}</label>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <label className="fw-normal">收件人電話</label>
+                  <label className="fw-normal">{order.user?.tel || "N/A"}</label>
+                </li>
+                <hr />
+                <li className="d-flex justify-content-between">
+                  <label className="fw-normal">付款金額</label>
+                  <label className="fw-normal">{`NT ${order?.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <label className="fw-normal">付款方式</label>
+                  <label className="fw-normal">{order.user?.payment || "N/A"}</label>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <label className="fw-normal">付款狀態</label>
+                  <label
+                    className={
+                      order?.is_paid === true
+                        ? "text-success"
+                        : "text-danger fw-bold"
+                    }
+                  >
+                    {order?.is_paid ? "已付款" : "未付款"}
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div className="d-flex justify-content-between">
+              <span></span>
+              <button className="order-button cart-order-button" onClick={() => handleCheckOut(order.id)}>
+                確認付款
+                {isLoading && <ClipLoader 
+                  color={'#000000'}
+                  size={15}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                  />
+                }
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       {isScreenLoading && (<div
