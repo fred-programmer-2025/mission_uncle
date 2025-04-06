@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import ArticleDetailModal from "../components/ArticleDetailModal";
@@ -34,28 +34,34 @@ function ArticlePage() {
     has_pre: false,
     has_next: false,
   });
+  //------
 
-  const handlePageChange = (page, articlesData = apiArticles) => {
-    if (!articlesData || articlesData.length === 0) {
-      return;
-    }
+  const handlePageChange = useCallback(
+    (page, articlesData = apiArticles) => {
+      if (!articlesData || articlesData.length === 0) {
+        return;
+      }
 
-    const totalArticles = articlesData.length;
-    const totalPages = Math.ceil(totalArticles / articlesPerPage);
-    const startIndex = (page - 1) * articlesPerPage;
-    const endIndex = Math.min(startIndex + articlesPerPage, totalArticles);
-    const paginatedArticles = articlesData.slice(startIndex, endIndex);
-    // console.log(`第 ${page} 頁顯示的文章:`, paginatedArticles);
-    setDisplayArticles(paginatedArticles); // 更新當前顯示的文章
-    setPageInfo({
-      total_pages: totalPages,
-      current_page: page,
-      has_pre: page > 1,
-      has_next: page < totalPages,
-    });
-  };
+      const totalArticles = articlesData.length;
+      const totalPages = Math.ceil(totalArticles / articlesPerPage);
+      const startIndex = (page - 1) * articlesPerPage;
+      const endIndex = Math.min(startIndex + articlesPerPage, totalArticles);
+      const paginatedArticles = articlesData.slice(startIndex, endIndex);
+
+      setDisplayArticles(paginatedArticles);
+      setPageInfo({
+        total_pages: totalPages,
+        current_page: page,
+        has_pre: page > 1,
+        has_next: page < totalPages,
+      });
+    },
+    [apiArticles, articlesPerPage]
+  );
+
+  //------
   //getArticles 取得所有文章
-  const getArticles = async () => {
+  const getArticles = useCallback(async () => {
     let allArticles = [];
     let page = 1;
     let hasNext = true;
@@ -73,19 +79,19 @@ function ArticlePage() {
         }
       } catch (error) {
         hasNext = false;
+        console.error("Error fetching articles:", error);
       }
     }
 
-    setApiArticles(allArticles); // 儲存所有文章
-    handlePageChange(1, allArticles); // 預設顯示第 1 頁
-  };
+    setApiArticles(allArticles);
+    handlePageChange(1, allArticles);
+  }, [handlePageChange]); // 依賴變數
 
   useEffect(() => {
     getArticles();
-  }, []);
+  }, [getArticles]); // 加入依賴陣列
 
   //---------用於轉換頁面顯示筆數10轉6
-
   //---------------------------ArticleDetailModal
   //取得單篇文章content內容
   const getArticle = async (id) => {
@@ -149,12 +155,13 @@ function ArticlePage() {
         </div>
         {/* <!-- 分頁 --> */}
         {displayArticles && displayArticles.length > 0 ? (
-        <Pagination
-          pageInfo={pageInfo}
-          handlePageChange={handlePageChange}
-        ></Pagination>
-        ) : ("")
-        }
+          <Pagination
+            pageInfo={pageInfo}
+            handlePageChange={handlePageChange}
+          ></Pagination>
+        ) : (
+          ""
+        )}
       </div>
       {/* <!-- 頁腳 --> */}
       {/** modal */}

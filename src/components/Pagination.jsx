@@ -1,5 +1,15 @@
-
 import "../styles/components/PaginationStyle.scss";
+import PropTypes from "prop-types";
+
+Pagination.propTypes = {
+  pageInfo: PropTypes.shape({
+    total_pages: PropTypes.number.isRequired,
+    current_page: PropTypes.number.isRequired,
+    has_pre: PropTypes.bool.isRequired,
+    has_next: PropTypes.bool.isRequired,
+  }).isRequired,
+  handlePageChange: PropTypes.func.isRequired,
+};
 
 function Pagination({ pageInfo, handlePageChange }) {
   return (

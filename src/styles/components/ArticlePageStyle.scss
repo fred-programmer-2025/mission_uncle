@@ -38,21 +38,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--theme-border);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-
     /* 使用 PNG 當遮罩 */
-    -webkit-mask-image: url("../../assets/Group.png");
-    mask-image: url("../../assets/Group.png");
-
-    /* 控制遮罩的大小與位置 */
-    -webkit-mask-size: cover;
-    mask-size: cover;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+    background-image: url("../../assets/Group.svg");
+    background-size: cover; //cover
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 

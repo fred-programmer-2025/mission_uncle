@@ -195,9 +195,9 @@
     top: 10% !important;
     left: 8% !important;
   }
-  .mb-adjust{
-    margin-bottom: -13% !important;
-  }
+  // .mb-adjust{
+  //   margin-bottom: -13% !important;
+  // }
 }
 
 .carousel-controls-wrapper-mobile {
@@ -255,23 +255,11 @@
     left: 50% !important;
     transform: translateX(-50%); /* 確保按鈕完全居中 */
   }
-  .mb-adjust{
-    margin-bottom: -200px !important;
+  .hero-mb-adjust{
+    margin-bottom: 1rem !important;
   }
-
-  // .yellow-card-title{
-  //   position: relative !important;
-  //   top: 40px !important;
-  //   width: 60% !important;
-  // }
-
-  // .yellow-card-text{
-  //   position: relative !important;
-  //   top: 40px !important;
-  //   width: 60% !important;
-  // }
   .yellow-card-content-position{  
-    top: 500px !important;
+    top: 40px !important;
   }
 }
 
@@ -294,9 +282,7 @@
     top: 8% !important;
     left: 4% !important;
   } 
-  .mb-adjust{
-    margin-bottom: -15% !important;
-  }
+
   .carousel-indicators{
     bottom: 5% !important;
   }
@@ -312,9 +298,7 @@
       height: 43px;
     }
   }
-  .mb-adjust{
-    margin-bottom: -15% !important;
-  }
+
 }
 
 
@@ -337,8 +321,8 @@
     top: 10% !important;
     left: 4% !important;
   } 
-  .mb-adjust{
-    margin-bottom: -17% !important;
+  .hero-mb-adjust{
+    margin-bottom: 0.75rem !important;
   }
 }
 
@@ -357,9 +341,9 @@
     top:-13% !important;
     left: 14% !important;
   }
-  .mb-adjust{
-    margin-bottom: -22% !important;
-  }
+  // .mb-adjust{
+  //   margin-bottom: -22% !important;
+  // }
 }
 
 @media (max-width: 408px){
@@ -377,9 +361,9 @@
     top: 10% !important;
     left: 5% !important;
   } 
-  .mb-adjust{
-    margin-bottom: -25% !important;
-  }
+  // .mb-adjust{
+  //   margin-bottom: -25% !important;
+  // }
 }
 @media (max-width: 376px){
   .carousel-controls-wrapper-mobile {

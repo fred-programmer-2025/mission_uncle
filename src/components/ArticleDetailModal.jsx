@@ -1,12 +1,24 @@
 import { useEffect, useRef } from "react";
 import { Modal } from "bootstrap";
+import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
+
+ArticleDetailModal.propTypes = {
+  tempArticle: PropTypes.shape({
+    title: PropTypes.string,
+    image: PropTypes.string,
+    description: PropTypes.string,
+    content: PropTypes.string,
+  }).isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+};
 
 function ArticleDetailModal({ tempArticle, isOpen, setIsOpen }) {
   //modal page
   const ArticleDetailModalRef = useRef(null);
-  
+
   // modal page
   useEffect(() => {
     new Modal(ArticleDetailModalRef.current, {

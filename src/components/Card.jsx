@@ -1,3 +1,13 @@
+import PropTypes from "prop-types";
+Card.propTypes = {
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  handleOpenArticleDetailModal: PropTypes.func.isRequired,
+};
+
 function Card({ article, handleOpenArticleDetailModal }) {
   return (
     <>

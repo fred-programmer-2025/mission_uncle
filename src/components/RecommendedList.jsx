@@ -11,9 +11,9 @@ const RecommendedList = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const uncles = [
-    { id: 1, name: "大叔 1", image: recommendUncle1 },
-    { id: 2, name: "大叔 2", image: recommendUncle2 },
-    { id: 3, name: "大叔 3", image: recommendUncle3 },
+    { id: 1, name: "大叔 1", image: recommendUncle1, url: "http://localhost:5173/mission_uncle/#/mission/-OL9mfA_V9rR4e1_RXFZ" },
+    { id: 2, name: "大叔 2", image: recommendUncle2, url: "http://localhost:5173/mission_uncle/#/mission/-OL9mA9KWm0r9dBNU0ZD"},
+    { id: 3, name: "大叔 3", image: recommendUncle3, url: "http://localhost:5173/mission_uncle/#/mission/-OJh-5xNnIFpW9jcGkS4" },
   ];
 
   return (
@@ -38,7 +38,7 @@ const RecommendedList = () => {
       <div className="container position-relative py-5" style={{ zIndex: 2 }}>
         <div className="row">
           {/* 左側標題區塊 - 桌面版顯示 */}
-          <div className="col-lg-3 d-none d-lg-block position-relative">
+          <div className="col-lg-3 d-none d-lg-block position-relative green-tag">
             <div className="position-absolute" style={{ top: "-50px", left: "0" }}>
               {/* 綠色標籤 */}
               <div className="mb-4">
@@ -127,7 +127,6 @@ const RecommendedList = () => {
                         }}
                       />
                     </div>
-                    
                     {/* 了解大叔按鈕 */}
                     <div className="mt-3 position-relative" style={{ 
                       paddingBottom: hoverIndex === index ? "1px" : "0", 
@@ -146,16 +145,21 @@ const RecommendedList = () => {
                         }}></div>
                       )}
                       
-                      <button className="btn w-100 py-2 fw-bold position-relative" style={{ 
-                        backgroundColor: hoverIndex === index ? "rgba(165, 238, 157, 1)" : "rgba(115, 219, 106, 1)",
-                        transition: "background-color 0.3s ease, transform 0.2s ease",
-                        transform: hoverIndex === index ? "translate(3px, -2px)" : "translate(0, 0)",
-                        border: "1px solid #000",
-                        borderRadius: "0",
-                        zIndex: 2
-                      }}>
+                      <a 
+                        href={uncle.url}  // 使用該大叔特定的URL
+                        className="btn w-100 py-2 fw-bold position-relative d-block text-decoration-none" 
+                        style={{ 
+                          backgroundColor: hoverIndex === index ? "rgba(165, 238, 157, 1)" : "rgba(115, 219, 106, 1)",
+                          transition: "background-color 0.3s ease, transform 0.2s ease",
+                          transform: hoverIndex === index ? "translate(3px, -2px)" : "translate(0, 0)",
+                          border: "1px solid #000",
+                          borderRadius: "0",
+                          zIndex: 2,
+                          color: "black"
+                        }}
+                      >
                         了解大叔 &gt;
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -166,7 +170,7 @@ const RecommendedList = () => {
             <div className="d-md-none">
               {uncles.map((uncle, index) => (
                 <div key={uncle.id} className="mb-4">
-                  <div className="position-relative">
+                  <div className="position-relative display-adjust position-adjust">
 
                     {/* 序號 - 手機版也使用 Dela Gothic One 字體 */}
                     <div className="position-absolute" style={{ 
@@ -181,11 +185,11 @@ const RecommendedList = () => {
                       {index + 1}
                     </div>
                     {/* 背景圖案 - 文字內容背景 */}
-                    <div className="position-absolute" style={{
+                    <div className="position-absolute text-bg-img-adjust" style={{
                       backgroundImage: `url(${textBgImage})`,
                       backgroundSize: "cover",
                       width: "334px",
-                      height: "200px",
+                      height: "185px",
                       top: "25px",
                       left: "-40px",
                       zIndex: -3
@@ -206,13 +210,19 @@ const RecommendedList = () => {
                     
                     {/* 了解大叔按鈕 */}
                     <div className="mt-2">
-                      <button className="btn w-100 py-2 fw-bold commended-btn-position" style={{ 
-                        backgroundColor: "rgba(115, 219, 106, 1)",
-                        border: "1px solid #333",
-                        borderRadius: "0"
-                      }}>
+                      <a 
+                        href={uncle.url}
+                        className="btn py-2 fw-bold recommended-btn-position recommended-btn-w-adjust text-decoration-none" 
+                        style={{ 
+                          backgroundColor: "rgba(115, 219, 106, 1)",
+                          border: "1px solid #333",
+                          borderRadius: "0",
+                          color: "black", // 保持文字顏色
+                          display: "block" // 確保 a 標籤表現得像按鈕
+                        }}
+                      >
                         了解大叔 &gt;
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>

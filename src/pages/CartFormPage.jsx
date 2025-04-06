@@ -19,17 +19,32 @@ export default function CartFormPage() {
   const navigate = useNavigate();
   const { setCartCount } = useCart();
   const [color, setColor] = useState("#9B9B9B"); // 設定預設文字顏色
-  
+  const [fieldErrors, setFieldErrors] = useState({
+    email: "",
+    name: "",
+    tel: "",
+    payment: "",
+  });
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant'
+      behavior: "instant",
     });
   }, []);
 
-  // 正確設置useForm，確保引入handleSubmit
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  // 使用 useForm
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    getValues,
+  } = useForm({
+    mode: "onSubmit",
+  });
 
   // 取得購物車資料
   const getCart = async () => {
@@ -38,18 +53,95 @@ export default function CartFormPage() {
       const res = await axios.get(`${BASE_URL}/api/${API_PATH}/cart`);
       setCart(res.data.data);
     } catch (error) {
-      alert('取得購物車列表失敗');
+      alert("取得購物車列表失敗");
     } finally {
       setIsScreenLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     getCart();
   }, []);
 
-  // 定義onSubmit函數，由handleSubmit包裝
+  // 驗證所有欄位
+  const validateAllFields = () => {
+    const emailValue = getValues("email");
+    const nameValue = getValues("name");
+    const telValue = getValues("tel");
+    const paymentValue = getValues("payment");
+
+    let hasError = false;
+
+    // 檢查 email
+    if (!emailValue) {
+      setFieldErrors((prev) => ({ ...prev, email: "Email 欄位必填" }));
+      hasError = true;
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailValue)) {
+      setFieldErrors((prev) => ({ ...prev, email: "Email 格式錯誤" }));
+      hasError = true;
+    } else {
+      setFieldErrors((prev) => ({ ...prev, email: "" }));
+    }
+
+    // 檢查姓名
+    if (!nameValue) {
+      setFieldErrors((prev) => ({ ...prev, name: "姓名欄位必填" }));
+      hasError = true;
+    } else {
+      setFieldErrors((prev) => ({ ...prev, name: "" }));
+    }
+
+    // 檢查電話
+    if (!telValue) {
+      setFieldErrors((prev) => ({ ...prev, tel: "電話欄位必填" }));
+      hasError = true;
+    } else if (!/^\d{8,10}$/.test(telValue)) {
+      setFieldErrors((prev) => ({ ...prev, tel: "電話格式錯誤" }));
+      hasError = true;
+    } else {
+      setFieldErrors((prev) => ({ ...prev, tel: "" }));
+    }
+
+    // 檢查付款方式
+    if (!paymentValue) {
+      setFieldErrors((prev) => ({ ...prev, payment: "請選擇付款方式" }));
+      hasError = true;
+    } else {
+      setFieldErrors((prev) => ({ ...prev, payment: "" }));
+    }
+
+    // 如果有錯誤，聚焦到第一個錯誤欄位
+    if (hasError) {
+      const firstError = ["email", "name", "tel", "payment"].find((key) => fieldErrors[key]);
+      if (firstError) {
+        document.getElementById(firstError)?.focus();
+      }
+    }
+
+    return hasError;
+  };
+
+  // 定義 onSubmit 函數
   const onSubmit = (data) => {
+    // 檢查購物車是否有商品
+    if (!cart?.carts?.length) {
+      alert("購物車無大叔資料");
+      // 設置計時器，3 秒後跳轉到產品頁面
+      setTimeout(() => {
+        navigate("/mission"); 
+      }, 3000);
+      return;
+    }
+
+    // 驗證所有欄位
+    const hasError = validateAllFields();
+
+    // 如果有錯誤，停止提交
+    if (hasError) {
+      return;
+    }
+
+    // 驗證通過，繼續處理
     const { message, ...user } = data;
     user.address = user.address || "預設地址";
     const userInfo = { data: { user, message } };
@@ -72,12 +164,17 @@ export default function CartFormPage() {
     }
   };
 
-  const handleChange = (el) => {
-    const selectedValue = el.target.value;
-    // 根據選擇的選項設定文字顏色
+  const handleChange = (e) => {
+    const selectedValue = e.target.value;
     if (selectedValue !== "") {
       setColor("black");
     }
+  };
+
+  // 處理輸入變更，立即清除錯誤訊息
+  const handleInputChange = (field, e) => {
+    setFieldErrors((prev) => ({ ...prev, [field]: "" }));
+    setValue(field, e.target.value, { shouldValidate: false });
   };
 
   return (
@@ -89,86 +186,75 @@ export default function CartFormPage() {
         {/* 訂購人資訊 */}
         <div className="order-info">
           <div className="order-content">
-            {/* 訂購表單 - 使用handleSubmit包裝onSubmit函數 */}
-            <form onSubmit={handleSubmit(onSubmit)}>
+            {/* 訂購表單 */}
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className="mb-3">
-                <label htmlFor="email" className="mb-2" style={{fontSize: '16px', fontWeight: '500'}}>
-                    電子郵件<span className="text-danger">*</span>
+                <label htmlFor="email" className="mb-2" style={{ fontSize: "16px", fontWeight: "500" }}>
+                  電子郵件<span className="text-danger">*</span>
                 </label>
                 <input
-                  {...register("email", {
-                    required: "Email 欄位必填",
-                    pattern: {
-                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: "Email 格式錯誤",
-                    },
-                  })}
-                  type="email"
+                  {...register("email")}
+                  type="text" // 改為 text，避免瀏覽器驗證
                   id="email"
                   name="email"
                   placeholder="請輸入 Email"
-                  className={`form-control form-custom ${errors.email && "is-invalid"}`}
+                  className={`form-control form-custom ${fieldErrors.email ? "is-invalid" : ""}`}
+                  onChange={(e) => handleInputChange("email", e)}
                 />
-                {errors.email && (
-                  <p className="text-danger my-2">{errors.email.message}</p>
-                )}
+                {fieldErrors.email && <p className="text-danger my-2">{fieldErrors.email}</p>}
               </div>
 
               <div className="mb-3">
-                <label htmlFor="name" className="mb-2" style={{fontSize: '16px', fontWeight: '500'}}>
-                    訂購人姓名<span className="text-danger">*</span>
+                <label htmlFor="name" className="mb-2" style={{ fontSize: "16px", fontWeight: "500" }}>
+                  訂購人姓名<span className="text-danger">*</span>
                 </label>
                 <input
-                  {...register("name", { required: "姓名欄位必填" })}
+                  {...register("name")}
                   type="text"
                   id="name"
                   name="name"
                   placeholder="請輸入訂購人姓名"
-                  className={`form-control form-custom ${errors.name && "is-invalid"}`}
+                  className={`form-control form-custom ${fieldErrors.name ? "is-invalid" : ""}`}
+                  onChange={(e) => handleInputChange("name", e)}
                 />
-                {errors.name && (
-                  <p className="text-danger my-2">{errors.name.message}</p>
-                )}
+                {fieldErrors.name && <p className="text-danger my-2">{fieldErrors.name}</p>}
               </div>
 
               <div className="mb-3">
-                <label htmlFor="tel" className="mb-2" style={{fontSize: '16px', fontWeight: '500'}}>
-                    訂購人電話<span className="text-danger">*</span>
+                <label htmlFor="tel" className="mb-2" style={{ fontSize: "16px", fontWeight: "500" }}>
+                  訂購人電話<span className="text-danger">*</span>
                 </label>
                 <input
-                  {...register("tel", {
-                    required: "電話欄位必填",
-                    pattern: {
-                      value: /^\d{8,10}$/,
-                      message: "電話格式錯誤",
-                    },
-                  })}
+                  {...register("tel")}
                   type="text"
                   id="tel"
                   name="tel"
                   placeholder="請輸入訂購人電話"
-                  className={`form-control form-custom ${errors.tel && "is-invalid"}`}
+                  className={`form-control form-custom ${fieldErrors.tel ? "is-invalid" : ""}`}
+                  onChange={(e) => handleInputChange("tel", e)}
                 />
-                {errors.tel && (
-                  <p className="text-danger my-2">{errors.tel.message}</p>
-                )}
+                {fieldErrors.tel && <p className="text-danger my-2">{fieldErrors.tel}</p>}
               </div>
 
               <div className="mb-3">
-                <label htmlFor="payment" style={{fontSize: '16px', fontWeight: '500'}}>
-                    請選擇付款方式<span className="text-danger">*</span>
+                <label htmlFor="payment" style={{ fontSize: "16px", fontWeight: "500" }}>
+                  請選擇付款方式<span className="text-danger">*</span>
                 </label>
-                
                 <select
-                  {...register("payment", { required: "請選擇付款方式" })}
+                  {...register("payment")}
                   id="payment"
-                  className={`form-select form-custom ${errors.payment && "is-invalid"}`}
+                  className={`form-select form-custom ${fieldErrors.payment ? "is-invalid" : ""}`}
                   name="payment"
-                  defaultValue="" // 確保初始值是空的
-                  onClick={handleChange}
-                  style={{color}}
+                  defaultValue=""
+                  style={{ color }}
+                  onChange={(e) => {
+                    handleInputChange("payment", e);
+                    handleChange(e);
+                  }}
                 >
-                  <option value="" disabled>請選擇付款方式</option>
+                  <option value="" disabled>
+                    請選擇付款方式
+                  </option>
                   <option value="WebATM">WebATM</option>
                   <option value="ATM">ATM</option>
                   <option value="CVS">CVS</option>
@@ -177,11 +263,13 @@ export default function CartFormPage() {
                   <option value="ApplePay">ApplePay</option>
                   <option value="GooglePay">GooglePay</option>
                 </select>
-                {errors.payment && <p className="text-danger">{errors.payment.message}</p>}
+                {fieldErrors.payment && <p className="text-danger">{fieldErrors.payment}</p>}
               </div>
 
               <div className="mb-3">
-                <label htmlFor="message" style={{fontSize: '16px', fontWeight: '500'}}>其他需求</label>
+                <label htmlFor="message" style={{ fontSize: "16px", fontWeight: "500" }}>
+                  其他需求
+                </label>
                 <textarea
                   {...register("message")}
                   id="message"
@@ -194,16 +282,28 @@ export default function CartFormPage() {
 
               {/* 按鈕 */}
               <div className="final-button">
-                <button className="shipping-button cartForm-shipping-button" onClick={() => navigate(-1)}>上一步</button>
-                <button type="submit" className="order-button cartForm-order-button">
-                  確認結帳                
-                  {isLoading && <ClipLoader 
-                    color={'#000000'}
-                    size={15}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
+                <button
+                  type="button"
+                  className="shipping-button cartForm-shipping-button"
+                  onClick={() => navigate(-1)}
+                >
+                  上一步
+                </button>
+                <button
+                  type="submit"
+                  className="order-button cartForm-order-button"
+                  disabled={isLoading}
+                >
+                  確認結帳
+                  {isLoading && (
+                    <ClipLoader
+                      color={"#000000"}
+                      size={15}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
                     />
-                  }</button>
+                  )}
+                </button>
               </div>
             </form>
           </div>
@@ -211,34 +311,56 @@ export default function CartFormPage() {
         {/* 訂單明細 */}
         <div className="cart-info">
           <div className="cart-content">
-            <div><label style={{fontSize: '20px', fontWeight: '700'}}>訂單明細</label></div>
-            {cart?.carts?.length &&
-              (cart.carts.map((cartItem) => {
-                return (
-                  <div key={cartItem.id} className="cart-list mt-2">
-                    <div className="cart-image"><img style={{width: '100%', height: '100%', objectFit: 'cover'}} src={cartItem.product.imageUrl} alt={cartItem.product.title} /></div>
-                    <div className="cart-text-all">
-                      <div className="cart-text">
-                        <div className="cart-text-sub">
-                          <label className="cart-text-name">{cartItem.product.title.replace(/\(.*$/, "")}</label>
-                          <label className="cart-text-ticket">{cartItem.product.unit}</label>
-                        </div>
-                        <label className="cart-text-qty">{`X${cartItem.qty}`}</label>
-                      </div>
-                      <label className="cart-text-price">{`NT ${cartItem.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
-                    </div>
+            <div>
+              <label style={{ fontSize: "20px", fontWeight: "700" }}>訂單明細</label>
+            </div>
+            {cart?.carts?.length > 0 ? (
+              cart.carts.map((cartItem) => (
+                <div key={cartItem.id} className="cart-list mt-2">
+                  <div className="cart-image">
+                    <img
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      src={cartItem.product.imageUrl}
+                      alt={cartItem.product.title}
+                    />
                   </div>
-                )
-              }))
-            }
+                  <div className="cart-text-all">
+                    <div className="cart-text">
+                      <div className="cart-text-sub">
+                        <label className="cart-text-name">
+                          {cartItem.product.title.replace(/\(.*$/, "")}
+                        </label>
+                        <label className="cart-text-ticket">{cartItem.product.unit}</label>
+                      </div>
+                      <label className="cart-text-qty">{`X${cartItem.qty}`}</label>
+                    </div>
+                    <label className="cart-text-price">{`NT ${cartItem.total.toLocaleString({
+                      style: "currency",
+                      currency: "TWD",
+                    })}`}</label>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>購物車無大叔資料</p>
+            )}
           </div>
           <div className="mt-3">
-            <button className="shipping-button-2" style={{width: '100%'}} onClick={() => navigate('/mission')}>繼續逛逛</button>
+            <button
+              className="shipping-button-2"
+              style={{ width: "100%" }}
+              onClick={() => navigate("/mission")}
+            >
+              繼續逛逛
+            </button>
           </div>
           <div className="cart-total">
             <div className="cart-text-all mt-3">
               <label className="cart-text-name">小計</label>
-              <label className="cart-text-price">{`NT ${cart?.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
+              <label className="cart-text-price">{`NT ${cart?.total?.toLocaleString({
+                style: "currency",
+                currency: "TWD",
+              })}`}</label>
             </div>
             <div className="cart-text-all mt-3">
               <label className="cart-text-name">平台費</label>
@@ -247,26 +369,31 @@ export default function CartFormPage() {
           </div>
           <div className="cart-text-all mt-3">
             <label className="cart-text-name">總金額</label>
-            <label className="cart-text-ticket">{`NT ${(Number(cart?.total)+200).toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
+            <label className="cart-text-ticket">{`NT ${(Number(cart?.total || 0) + 200).toLocaleString({
+              style: "currency",
+              currency: "TWD",
+            })}`}</label>
           </div>
         </div>
       </div>
-      {isScreenLoading && (<div
-        className="d-flex justify-content-center align-items-center"
-        style={{
-          position: "fixed",
-          inset: 0,
-          backgroundColor: "rgba(255,255,255,0.3)",
-          zIndex: 999
-        }}
-      >
-      <ClipLoader 
-        color={'#000000'}
-        size={30}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-      </div>)}
+      {isScreenLoading && (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(255,255,255,0.3)",
+            zIndex: 999,
+          }}
+        >
+          <ClipLoader
+            color={"#000000"}
+            size={30}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
     </>
   );
 }

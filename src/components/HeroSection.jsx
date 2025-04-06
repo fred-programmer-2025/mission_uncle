@@ -180,7 +180,7 @@ const HeroSection = () => {
                     </div>
                     </div>
                     {/* 黃色卡片內容 */}
-                    <div className="position-relative yellow-card-content-position">
+                    <div className="position-relative">
                       <img 
                         src={titleBg} 
                         alt="背景" 
@@ -198,14 +198,40 @@ const HeroSection = () => {
                         fontSize: 'clamp(10px, 1.5vw , 20px)',
                         lineHeight: '1.4'
                       }}>{item.subText}</p>
-                      <button className="btn btn-sm w-100 rounded-0 border border-dark text-dark fw-bold p-2" 
-                      style={{ 
-                        backgroundColor: 'rgba(115, 219, 106, 1)',
-                        color: 'white',
-                        fontSize: 'clamp(10px, 1.5vw , 20px)'
-                        }}>
-                        {item.buttonText} &gt;
-                      </button>
+                      <div className="position-relative" style={{ paddingBottom: "2px", paddingRight: "1px" }}>
+                        {/* 陰影背景 - 初始不可見 */}
+                        <div className="position-absolute top-0 left-0 w-100 h-100" style={{
+                          backgroundColor: "#000",
+                          transform: "translate(0px, 0px)",
+                          zIndex: 0,
+                          opacity: 0,
+                          transition: "opacity 0.2s ease"
+                        }}></div>
+                        
+                        {/* 將按鈕改為 a 標籤 */}
+                        <a 
+                          href="http://localhost:5173/mission_uncle/#/mission"
+                          className="btn w-100 btn-sm rounded-0 border border-dark text-dark fw-bold p-2 position-relative d-block text-decoration-none"
+                          style={{ 
+                            backgroundColor: 'rgba(115, 219, 106, 1)',
+                            color: 'white',
+                            zIndex: 1,
+                            transition: "background-color 0.3s ease, transform 0.2s ease"
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "translate(4px, -2px)";
+                            e.currentTarget.style.backgroundColor = "rgba(165, 238, 157, 1)";
+                            e.currentTarget.parentNode.querySelector("div").style.opacity = "1";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "translate(0, 0)";
+                            e.currentTarget.style.backgroundColor = "rgba(115, 219, 106, 1)";
+                            e.currentTarget.parentNode.querySelector("div").style.opacity = "0";
+                          }}
+                        >
+                          {item.buttonText} &gt;
+                        </a>
+                      </div>
                     </div>
                   </div>
                   </div>
@@ -277,22 +303,30 @@ const HeroSection = () => {
                           height: 'clamp(230px, 45vw, 350px)'
                         }}
                       />
-                      <div className="position-absolute top-0 left-0 w-100 h-100 p-3 d-flex flex-column justify-content-center">
+                      <div className="position-absolute left-0 w-100 h-100 p-3 d-flex flex-column justify-content-center yellow-card-content-position">
                         <img 
                           src={item.titleImage} 
                           alt="陪伴是最溫暖的支持" 
                           className="img-fluid mb-2 yellow-card-title"
                           style={{ maxWidth: '70%' }}
                         />
-                        <p className="mb-4 fw-bold" style={{ 
+                        <p className="fw-bold hero-mb-adjust" style={{ 
                           fontSize: 'clamp(14px, calc(14px + (26 - 14) * ((100vw - 375px) / (768 - 375))), 26px)',
                           lineHeight: '1.4'
                         }}>
                           {item.subText}
                         </p>
-                        <button className="btn w-100 btn-sm rounded-0 border border-dark text-dark fw-bold p-2" style={{ backgroundColor: 'rgba(115, 219, 106, 1)', color: 'white' }}>
-                          {item.buttonText}  &gt;
-                        </button>
+                        <a 
+                          href="http://localhost:5173/mission_uncle/#/mission"
+                          className="btn w-100 btn-sm rounded-0 border border-dark text-dark fw-bold p-2 text-decoration-none" 
+                          style={{ 
+                            backgroundColor: 'rgba(115, 219, 106, 1)', 
+                            color: 'white', 
+                            display: 'block' 
+                          }}
+                        >
+                          {item.buttonText} &gt;
+                        </a>
                       </div>
                     </div>
                     {/* 照片部分 */}

@@ -123,7 +123,7 @@ const FanReviews = () => {
 
       <div className="container py-3">
         {/* 標題 */}
-        <div className="text-center position-relative fans-reviews-title-position mb-5">
+        <div className="text-center position-relative mb-5">
           <div className="px-3 py-1 d-inline-block position-relative" style={{ 
             border: "1px solid #000",
             backgroundColor: "rgba(165, 238, 157, 1)",
@@ -235,7 +235,7 @@ const FanReviews = () => {
               <button
                 key={index}
                 type="button"
-                className={`btn btn-sm mx-1 p-0 radio-position ${index === activeIndex ? 'bg-success' : 'bg-secondary'}`}
+                className={`btn btn-sm mx-1 p-0 ${index === activeIndex ? 'bg-success' : 'bg-secondary'}`}
                 style={{ width: "30px", height: "4px", border: "none", borderRadius: "2px" }}
                 onClick={() => setActiveIndex(index)}
               ></button>
