@@ -30,25 +30,13 @@ export default function OrderPage() {
     setIsScreenLoading(true);
     try {
       const res = await axios.get(`${BASE_URL}/api/${API_PATH}/orders`);
-      const order = res.data.orders[0];
-      const productIds = Object.keys(res.data.orders[0].products); // 得到key[]
-      const products = [];
-      
-      productIds.forEach((productId) => {
-        const data = 
-        {
-          productData: res.data.orders[0].products[productId].product,
-          qty: res.data.orders[0].products[productId].qty
-        }
-        
-        products.push(data);
-      });
-      
+      const orders = res.data.orders;
+      const productIds = Object.keys(res.data.orders[0].products);
       setOrderDatas({
         ...datas,
-        order,
-        products
-      });
+        orders,
+        productIds
+      })
     } catch (error) {
       alert(error);
     } finally {
@@ -85,7 +73,6 @@ export default function OrderPage() {
         <BackgroundTree />
         <div className="border" style={{maxWidth: '692px', width: '100%', padding: '12px', margin: '10px 0'}}>
           <div key={orderDatas.order?.id}>
-            <div md={4}>
             {orderDatas.products?.map((product) => {
               return (
               <div key={product.productData.id} className="d-flex align-items-center my-3">
@@ -105,54 +92,54 @@ export default function OrderPage() {
               </div>
               )}
             )}
-            </div>
             <div md={4}>
               <ul className="list-unstyled">
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">電子郵件</label>
-                  <label className="fw-normal">{orderDatas.order?.user.email || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.email || "N/A"}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">收件人姓名</label>
-                  <label className="fw-normal">{orderDatas.order?.user.name || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.name || "N/A"}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">收件人電話</label>
-                  <label className="fw-normal">{orderDatas.order?.user.tel || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.tel || "N/A"}</label>
                 </li>
                 <hr />
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">付款金額</label>
-                  <label className="fw-normal">{`NT ${orderDatas.order?.total.toLocaleString({ style: 'currency', currency: 'TWD' }) || 0}`}</label>
+                  <label className="fw-normal">{`NT ${order?.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">付款方式</label>
-                  <label className="fw-normal">{orderDatas.order?.user.payment || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.payment || "N/A"}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">付款狀態</label>
                   <label
                     className={
-                      orderDatas.order?.is_paid === true
+                      order?.is_paid === true
                         ? "text-success"
                         : "text-danger fw-bold"
                     }
                   >
-                    {orderDatas.order?.is_paid ? "已付款" : "未付款"}
+                    {order?.is_paid ? "已付款" : "未付款"}
                   </label>
                 </li>
               </ul>
             </div>
             <div className="d-flex justify-content-between">
               <span></span>
-              <button className="order-button cart-order-button" disabled={orderDatas.order?.is_paid} onClick={() => handleCheckOut(orderDatas.order?.id)}>
+              <button className="order-button cart-order-button" onClick={() => handleCheckOut(order.id)}>
                 確認付款
                 {isLoading && <ClipLoader 
                   color={'#000000'}
                   size={15}
                   aria-label="Loading Spinner"
                   data-testid="loader"
-                  />}
+                  />
+                }
               </button>
             </div>
           </div>
