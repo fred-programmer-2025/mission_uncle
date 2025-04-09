@@ -44,9 +44,9 @@ export default function OrderPage() {
       
       setOrderDatas({
         ...datas,
-        order,
-        products
-      });
+        orders,
+        productIds
+      })
     } catch (error) {
       alert(error);
     } finally {
@@ -107,35 +107,35 @@ export default function OrderPage() {
               <ul className="list-unstyled">
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">電子郵件</label>
-                  <label className="fw-normal">{orderDatas.order?.user.email || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.email || "N/A"}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">收件人姓名</label>
-                  <label className="fw-normal">{orderDatas.order?.user.name || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.name || "N/A"}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">收件人電話</label>
-                  <label className="fw-normal">{orderDatas.order?.user.tel || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.tel || "N/A"}</label>
                 </li>
                 <hr />
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">付款金額</label>
-                  <label className="fw-normal">{`NT ${orderDatas.order?.total.toLocaleString({ style: 'currency', currency: 'TWD' }) || 0}`}</label>
+                  <label className="fw-normal">{`NT ${order?.total.toLocaleString({ style: 'currency', currency: 'TWD' })}`}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">付款方式</label>
-                  <label className="fw-normal">{orderDatas.order?.user.payment || "N/A"}</label>
+                  <label className="fw-normal">{order.user?.payment || "N/A"}</label>
                 </li>
                 <li className="d-flex justify-content-between">
                   <label className="fw-normal">付款狀態</label>
                   <label
                     className={
-                      orderDatas.order?.is_paid === true
+                      order?.is_paid === true
                         ? "text-success"
                         : "text-danger fw-bold"
                     }
                   >
-                    {orderDatas.order?.is_paid ? "已付款" : "未付款"}
+                    {order?.is_paid ? "已付款" : "未付款"}
                   </label>
                 </li>
               </ul>
