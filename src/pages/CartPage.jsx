@@ -10,10 +10,12 @@ import "../styles/components/ArticleBannerStyle.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
-const icon = (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-cart-x" viewBox="0 0 16 16">
-  <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793z"/>
-  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-</svg>);
+const icon = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-cart-x" viewBox="0 0 16 16">
+    <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793z"/>
+    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+  </svg>
+);
 
 export default function CartPage() {
   const [cart, setCart] = useState(null);
@@ -41,7 +43,6 @@ export default function CartPage() {
         }, 2000);
       }
       setCart(res.data.data);
-    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       alert('取得購物車列表失敗');
     } finally {
@@ -67,12 +68,12 @@ export default function CartPage() {
   }
   
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <div className="banner d-flex align-items-center justify-content-start">
         <h2 className="text-start banner-title mb-4">購物車清單</h2>
       </div>
       {cart?.carts?.length ? 
-      (<div className="container container-layout">
+      (<div className="container container-layout flex-grow-1">
         <table className="table align-middle mt-4">
           <thead>
             <tr>
@@ -104,7 +105,7 @@ export default function CartPage() {
           <button className="order-button cart-order-button" onClick={() => navigate('/cartForm')}>下一步</button>
         </div>
       </div>) : hasNoCart && 
-      <div className="container" style={{
+      <div className="container flex-grow-1" style={{
         height: '55vh', 
         display: 'flex', 
         justifyContent: 'center', 
@@ -136,6 +137,6 @@ export default function CartPage() {
         data-testid="loader"
       />
       </div>)}
-    </>
+    </div>
   )
 }

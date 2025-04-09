@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom"; // 引入 useNavigate
@@ -30,8 +30,18 @@ export default function OrderPage() {
     setIsScreenLoading(true);
     try {
       const res = await axios.get(`${BASE_URL}/api/${API_PATH}/orders`);
-      const orders = res.data.orders;
+      const order = res.data.orders[0];
       const productIds = Object.keys(res.data.orders[0].products);
+      const products = [];
+      
+      productIds.forEach((productId) => {
+        const data = {
+          productData: res.data.orders[0].products[productId].product,
+          qty: res.data.orders[0].products[productId].qty
+        }
+        products.push(data);
+      });
+      
       setOrderDatas({
         ...datas,
         orders,
@@ -47,11 +57,10 @@ export default function OrderPage() {
   const handleCheckOut = async (orderId) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(`${BASE_URL}/api/${API_PATH}/pay/${orderId}`);
+      await axios.post(`${BASE_URL}/api/${API_PATH}/pay/${orderId}`);
       getOrder();
-      // 設定5秒後跳轉到首頁
       setTimeout(() => {
-        navigate('/'); // 跳轉到首頁
+        navigate('/');
       }, 5000);
     } catch (error) {
       alert(error);
@@ -65,7 +74,7 @@ export default function OrderPage() {
   }, []);
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <div className="banner d-flex align-items-center justify-content-start">
         <h2 className="text-start banner-title mb-4">訂單明細列表</h2>
       </div>
@@ -73,25 +82,27 @@ export default function OrderPage() {
         <BackgroundTree />
         <div className="border" style={{maxWidth: '692px', width: '100%', padding: '12px', margin: '10px 0'}}>
           <div key={orderDatas.order?.id}>
-            {orderDatas.products?.map((product) => {
-              return (
-              <div key={product.productData.id} className="d-flex align-items-center my-3">
-                <div>
-                  <img
-                    className="me-3"
-                    src={product.productData.imageUrl}
-                    alt={product.productData.title.replace(/\(.*$/, "")}
-                    style={{width: '100px', height: '100px', objectFit: 'cover'}}
-                  />
-                </div>
-                <div className="cart-text-sub">
-                  <label className="cart-text-name">{product.productData.title.replace(/\(.*$/, "")}</label>
-                  <label className="cart-text-ticket">{product.productData.unit}</label>
-                  <p className="cart-text-price">{`NT ${product.productData.price.toLocaleString({ style: 'currency', currency: 'TWD' })} X ${product.qty}`}</p>
-                </div>
-              </div>
-              )}
-            )}
+            <div md={4}>
+              {orderDatas.products?.map((product) => {
+                return (
+                  <div key={product.productData.id} className="d-flex align-items-center my-3 ">
+                    <div>
+                      <img
+                        className="me-3"
+                        src={product.productData.imageUrl}
+                        alt={product.productData.title.replace(/\(.*$/, "")}
+                        style={{width: '100px', height: '100px', objectFit: 'cover'}}
+                      />
+                    </div>
+                    <div className="cart-text-sub">
+                      <label className="cart-text-name">{product.productData.title.replace(/\(.*$/, "")}</label>
+                      <label className="cart-text-ticket">{product.productData.unit}</label>
+                      <p className="cart-text-price">{`NT ${product.productData.price.toLocaleString({ style: 'currency', currency: 'TWD' })} X ${product.qty}`}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
             <div md={4}>
               <ul className="list-unstyled">
                 <li className="d-flex justify-content-between">
@@ -131,36 +142,43 @@ export default function OrderPage() {
             </div>
             <div className="d-flex justify-content-between">
               <span></span>
-              <button className="order-button cart-order-button" onClick={() => handleCheckOut(order.id)}>
+              <button
+                className="order-button cart-order-button"
+                disabled={orderDatas.order?.is_paid}
+                onClick={() => handleCheckOut(orderDatas.order?.id)}
+              >
                 確認付款
-                {isLoading && <ClipLoader 
-                  color={'#000000'}
-                  size={15}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
+                {isLoading && (
+                  <ClipLoader 
+                    color={'#000000'}
+                    size={15}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
                   />
-                }
+                )}
               </button>
             </div>
           </div>
         </div>
       </div>
-      {isScreenLoading && (<div
-        className="d-flex justify-content-center align-items-center"
-        style={{
-          position: "fixed",
-          inset: 0,
-          backgroundColor: "rgba(255,255,255,0.3)",
-          zIndex: 999
-        }}
-      >
-      <ClipLoader 
-        color={'#000000'}
-        size={30}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-      </div>)}
-    </>
+      {isScreenLoading && (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(255,255,255,0.3)",
+            zIndex: 999
+          }}
+        >
+          <ClipLoader 
+            color={'#000000'}
+            size={30}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
+    </div>
   );
 }

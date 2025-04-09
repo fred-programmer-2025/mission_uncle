@@ -178,7 +178,7 @@ export default function CartFormPage() {
   };
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <div className="banner d-flex align-items-center justify-content-start">
         <h2 className="text-start banner-title mb-4">訂購人資訊</h2>
       </div>
@@ -394,6 +394,6 @@ export default function CartFormPage() {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }
